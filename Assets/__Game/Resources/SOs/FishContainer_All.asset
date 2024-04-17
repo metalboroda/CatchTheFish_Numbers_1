@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d59ed9a9241ddc4196e901ef3cc4466, type: 3}
+  m_Name: FishContainer_All
+  m_EditorClassIdentifier: 
+  fishList:
+  - {fileID: 100026, guid: c3de410571f09694eb066f617b536b8f, type: 3}
+  - {fileID: 100014, guid: 1afcf7d7abc5e12489297243fe3a467d, type: 3}
+  - {fileID: 100000, guid: 42e66223db75de843a65a24bff0e003c, type: 3}
+  - {fileID: 100010, guid: 5255a74286c2c6c4e9270fa63240ecac, type: 3}
+  - {fileID: 100006, guid: 16f0a3ee2f3249842a5dee3f9f1519d2, type: 3}
+  - {fileID: 100014, guid: d3fd0d3d49423ba4b89f570bea731815, type: 3}
+  - {fileID: 100006, guid: 6e236de787236a940a836b8008b69dd4, type: 3}
+  - {fileID: 100004, guid: 16260c7bb50f3fd4b95100c7794c2412, type: 3}
+  - {fileID: 100004, guid: 1f98332f687b9724db3ff40ee9dc4d83, type: 3}
+  - {fileID: 100018, guid: 4ce39b6d746347b43870cd22a1135c86, type: 3}
+  - {fileID: 100012, guid: 1376d8317dcb8c04683783fce0b7de9a, type: 3}
+  - {fileID: 100006, guid: 6cadcc12b240aa847b1210dec6d112a0, type: 3}
+  - {fileID: 100028, guid: 8e88ac2c81398c440b3628466720e02c, type: 3}
+  - {fileID: 100012, guid: 784589347d804e94f94328cad94ad4e2, type: 3}
+  - {fileID: 100010, guid: 63af61e6c1254a04494a58e84d437e5f, type: 3}
+  - {fileID: 100002, guid: afbddcc100c8fe149b19769f20a5cba7, type: 3}
+  - {fileID: 100000, guid: cf30dd835bf62204998a08af08872946, type: 3}
+  - {fileID: 100016, guid: fc05d1a7f2fe4b84e8098aa158f08157, type: 3}
+  - {fileID: 100028, guid: a74ed1990ef183d4191afee5d003ae18, type: 3}
+  - {fileID: 100026, guid: 28ccc4b4723207d408b36a0187ee91ca, type: 3}
+  - {fileID: 100004, guid: 1062a4c4e6d5b014e800c43a72ef3e85, type: 3}
+  - {fileID: 100008, guid: 105e064e57134da4dbebcc789e14830f, type: 3}
+  - {fileID: 100012, guid: 71e14d95280b75c4f8d4964ad62af21d, type: 3}
+  - {fileID: 100006, guid: db53156a0e19a2a4d863951d5e134fb5, type: 3}
+  - {fileID: 100004, guid: a33cec81cdbd4364794d5e2fe538452e, type: 3}
