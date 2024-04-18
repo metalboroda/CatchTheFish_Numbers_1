@@ -1,7 +1,6 @@
 ﻿using Assets.__Game.Scripts.EventBus;
 using TMPro;
 using UnityEngine;
-using static Assets.__Game.Scripts.EventBus.EventStructs;
 
 namespace Assets.__Game.Scripts.Fish
 {
@@ -9,11 +8,11 @@ namespace Assets.__Game.Scripts.Fish
   {
     [SerializeField] private TextMeshProUGUI[] _numberTexts;
 
-    private EventBinding<FishEvent> _fishEventBinding;
+    private EventBinding<EventStructs.FishUiEvent> _fishEventBinding;
 
     private void OnEnable()
     {
-      _fishEventBinding = new EventBinding<FishEvent>(OnFishNumberReceived);
+      _fishEventBinding = new EventBinding<EventStructs.FishUiEvent>(OnFishNumberReceived);
     }
 
     private void OnDisable()
@@ -21,13 +20,13 @@ namespace Assets.__Game.Scripts.Fish
       _fishEventBinding.Remove(OnFishNumberReceived);
     }
 
-    private void OnFishNumberReceived(FishEvent fishEvent)
+    private void OnFishNumberReceived(EventStructs.FishUiEvent fishUiEvent)
     {
-      if (fishEvent.FishId != transform.GetInstanceID()) return;
+      if (fishUiEvent.FishId != transform.GetInstanceID()) return;
 
       foreach (var text in _numberTexts)
       {
-        text.SetText(fishEvent.FishNumber.ToString());
+        text.SetText(fishUiEvent.FishNumber.ToString());
       }
     }
   }

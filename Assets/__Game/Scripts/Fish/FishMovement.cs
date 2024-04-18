@@ -1,3 +1,4 @@
+using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Tools;
 using DG.Tweening;
 using UnityEngine;
@@ -14,9 +15,21 @@ namespace Assets.__Game.Scripts.Fish
 
     private RandomPointInCamera _randomPointInCamera;
 
+    private EventBinding<EventStructs.FishDestroyEvent> _fishDestroyEvent;
+
     private void Awake()
     {
       _randomPointInCamera = new RandomPointInCamera(Camera.main, _minMovementDistance);
+    }
+
+    private void OnEnable()
+    {
+      _fishDestroyEvent = new EventBinding<EventStructs.FishDestroyEvent>(StopTweeners);
+    }
+
+    private void OnDisable()
+    {
+      _fishDestroyEvent.Remove(StopTweeners);
     }
 
     private void Start()
@@ -39,11 +52,18 @@ namespace Assets.__Game.Scripts.Fish
         point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg, -90f, 90f);
 
       transform.DORotate(new Vector3(
-        transform.rotation.x, targetYRotation, transform.rotation.z), _rotationDuration);
+       transform.rotation.x, targetYRotation, transform.rotation.z), _rotationDuration);
       transform.DOMove(point, _movementSpeed)
-        .SetEase(Ease.InOutQuad)
-        .SetSpeedBased(true)
-        .OnComplete(MoveToPoint);
+       .SetEase(Ease.InOutQuad)
+       .SetSpeedBased(true)
+       .OnComplete(MoveToPoint);
+    }
+
+    private void StopTweeners(EventStructs.FishDestroyEvent fishDestroyEvent)
+    {
+      if (fishDestroyEvent.FishId != transform.GetInstanceID()) return;
+
+      DOTween.Kill(transform);
     }
   }
 }
