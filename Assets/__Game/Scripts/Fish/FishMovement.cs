@@ -9,14 +9,15 @@ namespace Assets.__Game.Scripts.Fish
     [SerializeField] private float _movementSpeed = 5f;
     [SerializeField] private float _minMovementDelay = 1f;
     [SerializeField] private float _maxMovementDelay = 2f;
-    [SerializeField] private float _minMovementDistance = 10f;
     [SerializeField] private float _rotationDuration = 1f;
+
+    private Tweener _rotationTween;
 
     private RandomPointInCamera _randomPointInCamera;
 
     private void Awake()
     {
-      _randomPointInCamera = new RandomPointInCamera(_minMovementDistance, Camera.main);
+      _randomPointInCamera = new RandomPointInCamera(Camera.main);
     }
 
     private void Start()
@@ -33,17 +34,21 @@ namespace Assets.__Game.Scripts.Fish
 
       transform.DOLookAt(point, _rotationDuration);
       transform.DOMove(point, _movementSpeed)
-        .SetDelay(randDelay)
         .SetEase(Ease.InOutQuad)
         .SetSpeedBased(true)
-        .OnComplete(AlignRotation);
+        .OnComplete(() =>
+        {
+          MoveToPoint();
+          //AlignRotation();
+        });
     }
 
     private void AlignRotation()
     {
+      DOTween.Kill(_rotationTween);
       Vector3 rotation = new(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-      transform.DORotate(rotation, _rotationDuration * 2)
+      _rotationTween = transform.DORotate(rotation, _rotationDuration * 2)
         .SetEase(Ease.OutQuad);
     }
   }

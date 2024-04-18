@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 2
-  _minMovementDistance: 25
+  _minMovementDelay: 0.15
+  _maxMovementDelay: 0.5
   _rotationDuration: 0.5
