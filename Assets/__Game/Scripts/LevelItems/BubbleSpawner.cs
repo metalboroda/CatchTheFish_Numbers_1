@@ -24,7 +24,14 @@ namespace Assets.__Game.Scripts.LevelItems
     [Space]
     [SerializeField] private GameObject[] _bubblesToSpawn;
 
-    void Start()
+    private Camera _mainCamera;
+
+    private void Awake()
+    {
+      _mainCamera = Camera.main;
+    }
+
+    private void Start()
     {
       StartCoroutine(SpawnBubblesPeriodically());
     }
@@ -46,7 +53,7 @@ namespace Assets.__Game.Scripts.LevelItems
       GameObject bubblePrefab = GetRandomBubble();
 
       float randomX = Random.Range(
-        -Camera.main.orthographicSize * Camera.main.aspect, Camera.main.orthographicSize * Camera.main.aspect);
+          -_mainCamera.orthographicSize * _mainCamera.aspect, _mainCamera.orthographicSize * _mainCamera.aspect);
       Vector3 spawnPosition = new Vector3(randomX, transform.position.y, transform.position.z);
 
       Bubble spawnedBubble = LeanPool.Spawn(bubblePrefab, spawnPosition, Quaternion.identity).GetComponent<Bubble>();
