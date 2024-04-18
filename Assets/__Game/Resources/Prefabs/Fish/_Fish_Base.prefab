@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7352ee0e82e994947a68dd8f27979790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minMovementDistance: 10
+  _movementSpeed: 2
+  _minMovementDistance: 25
+  _rotationDuration: 0.5

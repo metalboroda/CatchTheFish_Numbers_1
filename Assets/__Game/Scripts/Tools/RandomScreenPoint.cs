@@ -2,37 +2,47 @@
 
 namespace Assets.__Game.Scripts.Tools
 {
-  public class RandomPointGenerator
+  public class RandomPointInCamera
   {
-    private readonly float _minMovementDistance;
+    private float _minDistance;
+    private Vector3 _previousPoint;
+    private Camera _mainCamera;
 
-    private Vector2 _lastPoint;
-
-    public RandomPointGenerator(float minMovementDistance)
+    public RandomPointInCamera(float minDistance, Camera camera)
     {
-      _minMovementDistance = minMovementDistance;
-      _lastPoint = GetRandomPointOnScreen();
+      _minDistance = minDistance;
+      _previousPoint = Vector3.zero;
+      _mainCamera = camera;
     }
 
-    public Vector2 GetRandomPointOnScreen()
+    public Vector3 GetRandomPointInCamera()
     {
-      Vector2 randomPoint;
+      Vector3 randomPoint = GetRandomPoint();
 
-      do
+      while (!IsFarEnoughFromPrevious(randomPoint))
       {
-        var randomX = Random.Range(0f, 1f);
-        var randomY = Random.Range(0f, 1f);
+        randomPoint = GetRandomPoint();
+      }
 
-        randomPoint = new Vector2(randomX, randomY);
-
-        randomPoint.x *= Screen.width;
-        randomPoint.y *= Screen.height;
-
-      } while (Vector2.Distance(randomPoint, _lastPoint) < _minMovementDistance);
-
-      _lastPoint = randomPoint;
+      _previousPoint = randomPoint;
 
       return randomPoint;
+    }
+
+    private Vector3 GetRandomPoint()
+    {
+      float randomX = Random.Range(0f, 1f);
+      float randomY = Random.Range(0f, 1f);
+      Vector3 viewportPoint = new(randomX, randomY, 0f);
+
+      return _mainCamera.ViewportToWorldPoint(viewportPoint);
+    }
+
+    private bool IsFarEnoughFromPrevious(Vector3 point)
+    {
+      if (_previousPoint == Vector3.zero) return true;
+
+      return Vector3.Distance(point, _previousPoint) >= _minDistance;
     }
   }
 }
