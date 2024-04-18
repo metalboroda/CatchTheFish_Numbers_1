@@ -7,11 +7,7 @@ namespace Assets.__Game.Scripts.Fish
   public class FishMovement : MonoBehaviour
   {
     [SerializeField] private float _movementSpeed = 5f;
-    [SerializeField] private float _minMovementDelay = 1f;
-    [SerializeField] private float _maxMovementDelay = 2f;
     [SerializeField] private float _rotationDuration = 1f;
-
-    private Tweener _rotationTween;
 
     private RandomPointInCamera _randomPointInCamera;
 
@@ -28,28 +24,16 @@ namespace Assets.__Game.Scripts.Fish
     private void MoveToPoint()
     {
       Vector3 point = _randomPointInCamera.GetRandomPointInCamera();
-      float randDelay = Random.Range(_minMovementDelay, _maxMovementDelay);
 
       point.z = 0f;
 
-      transform.DOLookAt(point, _rotationDuration);
+      float targetYRotation = Mathf.Clamp(Mathf.Atan2(point.x - transform.position.x, point.z - transform.position.z) * Mathf.Rad2Deg, -90f, 90f);
+
+      transform.DORotate(new Vector3(transform.rotation.x, targetYRotation, transform.rotation.z), _rotationDuration);
       transform.DOMove(point, _movementSpeed)
-        .SetEase(Ease.InOutQuad)
+        .SetEase(Ease.InOutSine)
         .SetSpeedBased(true)
-        .OnComplete(() =>
-        {
-          MoveToPoint();
-          //AlignRotation();
-        });
-    }
-
-    private void AlignRotation()
-    {
-      DOTween.Kill(_rotationTween);
-      Vector3 rotation = new(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-
-      _rotationTween = transform.DORotate(rotation, _rotationDuration * 2)
-        .SetEase(Ease.OutQuad);
+        .OnComplete(MoveToPoint);
     }
   }
 }
