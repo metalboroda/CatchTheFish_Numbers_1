@@ -15,7 +15,7 @@ namespace Assets.__Game.Scripts.Fish
 
     private void Awake()
     {
-      _randomPointInCamera = new RandomPointInCamera(_minMovementDistance, Camera.main);
+      _randomPointInCamera = new RandomPointInCamera(Camera.main, _minMovementDistance);
     }
 
     private void Start()

@@ -10,5 +10,13 @@ namespace Assets.__Game.Scripts.EventBus
       public State State;
     }
     #endregion
+
+    #region Player
+    public struct FishEvent : IEvent
+    {
+      public int FishId;
+      public int FishNumber;
+    }
+    #endregion
   }
 }

@@ -7,7 +7,7 @@ namespace Assets.__Game.Scripts.Tools
     private float _minDistance;
     private Camera _mainCamera;
 
-    public RandomPointInCamera(float minDistance, Camera camera)
+    public RandomPointInCamera(Camera camera, float minDistance = 10f)
     {
       _minDistance = minDistance;
       _mainCamera = camera;
