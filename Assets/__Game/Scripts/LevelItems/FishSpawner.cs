@@ -2,7 +2,7 @@
 using Assets.__Game.Scripts.Tools;
 using UnityEngine;
 
-namespace Assets.__Game.Scripts.Level
+namespace Assets.__Game.Scripts.LevelItems
 {
   public class FishSpawner : MonoBehaviour
   {
