@@ -25,7 +25,14 @@ namespace Assets.__Game.Scripts.Managers
       {
         if (number == fishClickEvent.FishNumber)
         {
-          fishClickEvent.FishHandler.DestroyFish();
+          fishClickEvent.FishHandler.DestroyFish(true);
+
+          break;
+        }
+
+        if (number != fishClickEvent.FishNumber)
+        {
+          fishClickEvent.FishHandler.DestroyFish(false);
 
           break;
         }

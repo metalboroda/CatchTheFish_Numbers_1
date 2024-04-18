@@ -28,11 +28,12 @@ namespace Assets.__Game.Scripts.Fish
       });
     }
 
-    public void DestroyFish()
+    public void DestroyFish(bool correct)
     {
       EventBus<EventStructs.FishDestroyEvent>.Raise(new EventStructs.FishDestroyEvent
       {
-        FishId = transform.GetInstanceID()
+        FishId = transform.GetInstanceID(),
+        Correct = correct
       });
 
       Destroy(gameObject);

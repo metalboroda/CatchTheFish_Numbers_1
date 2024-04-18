@@ -30,6 +30,7 @@ namespace Assets.__Game.Scripts.EventBus
     public struct FishDestroyEvent : IEvent
     {
       public int FishId;
+      public bool Correct;
     }
     #endregion
   }
