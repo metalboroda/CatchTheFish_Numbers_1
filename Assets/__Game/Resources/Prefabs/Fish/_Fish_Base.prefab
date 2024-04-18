@@ -400,7 +400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31befda153bca144dbfbadc2784b8280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _number: 0
 --- !u!114 &5938173207438206903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7352ee0e82e994947a68dd8f27979790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 2
   _minMovementDistance: 10
   _rotationDuration: 1
 --- !u!114 &7642784097244874339

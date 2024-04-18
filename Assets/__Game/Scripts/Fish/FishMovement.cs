@@ -6,10 +6,11 @@ namespace Assets.__Game.Scripts.Fish
 {
   public class FishMovement : MonoBehaviour
   {
-    [SerializeField] private float _movementSpeed = 5f;
     [Range(0, 10)]
     [SerializeField] private float _minMovementDistance = 10f;
     [SerializeField] private float _rotationDuration = 1f;
+
+    private float _movementSpeed;
 
     private RandomPointInCamera _randomPointInCamera;
 
@@ -21,6 +22,11 @@ namespace Assets.__Game.Scripts.Fish
     private void Start()
     {
       MoveToPoint();
+    }
+
+    public void SetParameters(float movementSpeed)
+    {
+      _movementSpeed = movementSpeed;
     }
 
     private void MoveToPoint()

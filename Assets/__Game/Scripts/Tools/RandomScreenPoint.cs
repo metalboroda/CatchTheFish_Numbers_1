@@ -30,8 +30,8 @@ namespace Assets.__Game.Scripts.Tools
 
     private Vector3 GetRandomPoint()
     {
-      float randomX = Random.Range(0f, 0.8f);
-      float randomY = Random.Range(0f, 0.8f);
+      float randomX = Random.Range(0.1f, 0.9f);
+      float randomY = Random.Range(0.1f, 0.9f);
       Vector3 viewportPoint = new Vector3(randomX, randomY, 0f);
 
       return _mainCamera.ViewportToWorldPoint(viewportPoint);

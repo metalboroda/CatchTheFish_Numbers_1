@@ -211,8 +211,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd3828921bdd994fbb781487826a6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fishContainer: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
-  _spawnAmount: 0
+  _minFishMovementSpeed: 0.75
+  _maxFishMovementSpeed: 1.25
+  _fishToSpawn:
+  - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
+    FishNumber: 1
+    Amount: 1
+  - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
+    FishNumber: 2
+    Amount: 1
+  - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
+    FishNumber: 3
+    Amount: 1
+  - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
+    FishNumber: 4
+    Amount: 1
+  - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
+    FishNumber: 5
+    Amount: 1
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

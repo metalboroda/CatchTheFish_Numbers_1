@@ -4,14 +4,23 @@ using UnityEngine;
 namespace Assets.__Game.Scripts.SOs
 {
   [CreateAssetMenu(fileName = "FishContainer", menuName = "Fish/FishContainer")]
-  public class FishContainerSO : ScriptableObject
+  public class FishContainerSo : ScriptableObject
   {
     [SerializeField] private List<GameObject> fishList = new();
 
     public List<GameObject> FishList
     {
-      get { return fishList; }
-      private set { fishList = value; }
+      get => fishList;
+      private set => fishList = value;
+    }
+
+    public GameObject GetRandomFish()
+    {
+      if (fishList == null || fishList.Count == 0) return null;
+
+      int randomIndex = Random.Range(0, fishList.Count);
+
+      return fishList[randomIndex];
     }
   }
 }
