@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bubblesParticlesPrefab: {fileID: 7929217921800577076, guid: a719090e1e5b9b5409457ace3afce955, type: 3}
   _starPrefab: {fileID: 0}
-  _sadSmilePrefab: {fileID: 0}
+  _angryFaceParticlesPrefab: {fileID: 1428483455149973157, guid: 0e46717c97ed5dc48a4704cd69dd851e, type: 3}
 --- !u!1 &4036806635655805620
 GameObject:
   m_ObjectHideFlags: 0

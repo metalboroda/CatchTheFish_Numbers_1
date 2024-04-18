@@ -8,6 +8,12 @@ namespace Assets.__Game.Scripts.Fish
   {
     private int _fishNumber;
 
+    public int FishNumber
+    {
+      get => _fishNumber;
+      private set => _fishNumber = value;
+    }
+
     public void SetFishNumber(int fishNumber)
     {
       _fishNumber = fishNumber;

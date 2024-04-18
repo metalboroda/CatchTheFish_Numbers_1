@@ -9,7 +9,7 @@ namespace Assets.__Game.Scripts.Fish
   {
     [SerializeField] private GameObject _bubblesParticlesPrefab;
     [SerializeField] private GameObject _starPrefab;
-    [SerializeField] private GameObject _sadSmilePrefab;
+    [SerializeField] private GameObject _angryFaceParticlesPrefab;
 
     private EventBinding<EventStructs.FishDestroyEvent> _fishDestroyEvent;
 
@@ -33,7 +33,7 @@ namespace Assets.__Game.Scripts.Fish
       }
       else
       {
-        //SpawnParticle(_sadSmilePrefab);
+        SpawnParticle(_angryFaceParticlesPrefab);
       }
 
       SpawnParticle(_bubblesParticlesPrefab);

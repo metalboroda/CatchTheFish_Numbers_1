@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.__Game.Scripts.SOs
@@ -6,21 +5,21 @@ namespace Assets.__Game.Scripts.SOs
   [CreateAssetMenu(fileName = "FishContainer", menuName = "Fish/FishContainer")]
   public class FishContainerSo : ScriptableObject
   {
-    [SerializeField] private List<GameObject> fishList = new();
+    [SerializeField] private GameObject[] _fishes;
 
-    public List<GameObject> FishList
+    public GameObject[] Fishes
     {
-      get => fishList;
-      private set => fishList = value;
+      get => _fishes;
+      private set => _fishes = value;
     }
 
     public GameObject GetRandomFish()
     {
-      if (fishList == null || fishList.Count == 0) return null;
+      if (_fishes == null || _fishes.Length == 0) return null;
 
-      int randomIndex = Random.Range(0, fishList.Count);
+      int randomIndex = Random.Range(0, _fishes.Length);
 
-      return fishList[randomIndex];
+      return _fishes[randomIndex];
     }
   }
 }

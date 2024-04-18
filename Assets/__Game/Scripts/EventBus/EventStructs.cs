@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Assets.__Game.Scripts.Fish;
 using Assets.__Game.Scripts.StateMachine;
 
@@ -12,6 +13,14 @@ namespace Assets.__Game.Scripts.EventBus
       public State State;
     }
 
+    #endregion
+
+    #region Fish Spawner
+    public struct FishSpawnerEvent : IEvent
+    {
+      public List<FishHandler> CorrectFishHandlers;
+      public List<FishHandler> IncorrectFinishHandlers;
+    }
     #endregion
 
     #region Fish
