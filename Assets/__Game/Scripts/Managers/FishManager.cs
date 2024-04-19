@@ -28,6 +28,14 @@ namespace Assets.__Game.Scripts.Managers
       _fishClickEvent.Remove(ReceiveFish);
     }
 
+    private void Start()
+    {
+      EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
+      {
+        CorrectNumbers = _correctNumbersContainerSo.CorrectNumbers
+      });
+    }
+
     private void AddFishesToList(EventStructs.FishSpawnerEvent fishSpawnerEvent)
     {
       _correctNumberFish.AddRange(fishSpawnerEvent.CorrectFishHandlers);

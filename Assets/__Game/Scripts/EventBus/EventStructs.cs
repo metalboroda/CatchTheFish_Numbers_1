@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.Fish;
 using Assets.__Game.Scripts.StateMachine;
 
@@ -7,12 +8,10 @@ namespace Assets.__Game.Scripts.EventBus
   public class EventStructs
   {
     #region Infrastructure
-
     public struct StateChanged : IEvent
     {
       public State State;
     }
-
     #endregion
 
     #region Fish Spawner
@@ -28,6 +27,7 @@ namespace Assets.__Game.Scripts.EventBus
     #region Fish Manager
     public struct FishReceivedEvent : IEvent
     {
+      public int[] CorrectNumbers;
       public int CorrectFishIncrement;
       public int IncorrectFishIncrement;
     }
@@ -50,6 +50,14 @@ namespace Assets.__Game.Scripts.EventBus
     {
       public int FishId;
       public bool Correct;
+    }
+    #endregion
+
+    #region UI
+
+    public struct UiButtonEvent : IEvent
+    {
+      public UiEnums UiEnums;
     }
     #endregion
   }
