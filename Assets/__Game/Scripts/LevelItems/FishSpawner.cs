@@ -65,7 +65,9 @@ namespace Assets.__Game.Scripts.LevelItems
       EventBus<EventStructs.FishSpawnerEvent>.Raise(new EventStructs.FishSpawnerEvent
       {
         CorrectFishHandlers = _correctNumbersFishHandlers,
-        IncorrectFinishHandlers = _incorrectNumbersFishHandlers
+        CorrectFishCount = _correctNumbersFishHandlers.Count,
+        IncorrectFinishHandlers = _incorrectNumbersFishHandlers,
+        IncorrectFinishCount = _incorrectNumbersFishHandlers.Count
       });
     }
 

@@ -14,18 +14,18 @@ namespace Assets.__Game.Scripts.Managers
     private List<FishHandler> _incorrectNumberFish = new();
 
     private EventBinding<EventStructs.FishSpawnerEvent> _fishSpawnerEvent;
-    private EventBinding<EventStructs.FishClickEvent> _fishEvent;
+    private EventBinding<EventStructs.FishClickEvent> _fishClickEvent;
 
     private void OnEnable()
     {
       _fishSpawnerEvent = new EventBinding<EventStructs.FishSpawnerEvent>(AddFishesToList);
-      _fishEvent = new EventBinding<EventStructs.FishClickEvent>(ReceiveFish);
+      _fishClickEvent = new EventBinding<EventStructs.FishClickEvent>(ReceiveFish);
     }
 
     private void OnDisable()
     {
       _fishSpawnerEvent.Remove(AddFishesToList);
-      _fishEvent.Remove(ReceiveFish);
+      _fishClickEvent.Remove(ReceiveFish);
     }
 
     private void AddFishesToList(EventStructs.FishSpawnerEvent fishSpawnerEvent)
@@ -38,20 +38,43 @@ namespace Assets.__Game.Scripts.Managers
     {
       foreach (var number in _correctNumbersContainerSo.CorrectNumbers)
       {
-        if (number == fishClickEvent.FishNumber)
+        if (_correctNumberFish.Contains(fishClickEvent.FishHandler))
         {
+          _correctNumberFish.Remove(fishClickEvent.FishHandler);
           fishClickEvent.FishHandler.DestroyFish(true);
+
+          EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
+          {
+            CorrectFishIncrement = 1
+          });
 
           break;
         }
 
-        if (number != fishClickEvent.FishNumber)
+        if (_incorrectNumberFish.Contains(fishClickEvent.FishHandler))
         {
+          _incorrectNumberFish.Remove(fishClickEvent.FishHandler);
           fishClickEvent.FishHandler.DestroyFish(false);
+
+          EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
+          {
+            IncorrectFishIncrement = 1
+          });
 
           break;
         }
       }
+
+      CheckFishLists();
+    }
+
+    private void CheckFishLists()
+    {
+      if (_correctNumberFish.Count == 0)
+        Debug.Log("Win");
+
+      if (_incorrectNumberFish.Count == 0)
+        Debug.Log("Lose");
     }
   }
 }

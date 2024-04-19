@@ -19,7 +19,17 @@ namespace Assets.__Game.Scripts.EventBus
     public struct FishSpawnerEvent : IEvent
     {
       public List<FishHandler> CorrectFishHandlers;
+      public int CorrectFishCount;
       public List<FishHandler> IncorrectFinishHandlers;
+      public int IncorrectFinishCount;
+    }
+    #endregion
+
+    #region Fish Manager
+    public struct FishReceivedEvent : IEvent
+    {
+      public int CorrectFishIncrement;
+      public int IncorrectFishIncrement;
     }
     #endregion
 
