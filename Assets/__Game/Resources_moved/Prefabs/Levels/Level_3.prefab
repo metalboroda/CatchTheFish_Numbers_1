@@ -10,15 +10,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 567336076984696588, guid: c65da20a3316c264ca556b75321916a1, type: 3}
       propertyPath: m_Name
-      value: Level_1
+      value: Level_3
       objectReference: {fileID: 0}
     - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
       propertyPath: _maxFishMovementSpeed
-      value: 0.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
       propertyPath: _minFishMovementSpeed
-      value: 0.25
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
+      propertyPath: _fishToSpawn.Array.data[0].Amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
+      propertyPath: _fishToSpawn.Array.data[1].Amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
+      propertyPath: _fishToSpawn.Array.data[2].Amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
+      propertyPath: _fishToSpawn.Array.data[3].Amount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6822429727302462690, guid: c65da20a3316c264ca556b75321916a1, type: 3}
+      propertyPath: _fishToSpawn.Array.data[4].Amount
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8573187859200488914, guid: c65da20a3316c264ca556b75321916a1, type: 3}
       propertyPath: m_LocalPosition.x

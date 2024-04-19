@@ -3385,6 +3385,8 @@ MonoBehaviour:
     LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_1.prefab
   - LevelName: Level_2
     LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_2.prefab
+  - LevelName: Level_3
+    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_3.prefab
 --- !u!1 &1570698455
 GameObject:
   m_ObjectHideFlags: 0
