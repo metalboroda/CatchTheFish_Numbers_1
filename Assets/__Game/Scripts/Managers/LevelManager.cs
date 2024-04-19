@@ -1,88 +1,89 @@
-﻿  using Assets.__Game.Scripts.Enums;
-  using Assets.__Game.Scripts.EventBus;
-  using UnityEngine;
-  using UnityEngine.AddressableAssets;
-  using UnityEngine.ResourceManagement.AsyncOperations;
+﻿using Assets.__Game.Scripts.Enums;
+using Assets.__Game.Scripts.EventBus;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
-  namespace Assets.__Game.Scripts.Managers
+namespace Assets.__Game.Scripts.Managers
+{
+  public class LevelManager : MonoBehaviour
   {
-    public class LevelManager : MonoBehaviour
+    [SerializeField] private Level[] _levels;
+
+    private int _currentLevelIndex = 0;
+    private GameObject _currentLevelPrefab;
+
+    private GameSettings _gameSettings;
+
+    private EventBinding<EventStructs.UiButtonEvent> _uiButtonEvent;
+
+    private void Awake()
     {
-      [SerializeField] private Level[] _levels;
+      LoadSettings();
+    }
 
-      private int _currentLevelIndex = 0;
-      private GameObject _currentLevelPrefab;
+    private void OnEnable()
+    {
+      _uiButtonEvent = new EventBinding<EventStructs.UiButtonEvent>(LoadNextLevel);
+    }
 
-      private GameSettings _gameSettings;
+    private void OnDisable()
+    {
+      _uiButtonEvent.Remove(LoadNextLevel);
+    }
 
-      private EventBinding<EventStructs.UiButtonEvent> _uiButtonEvent;
+    private void Start()
+    {
+      SetSavedLevel();
+      LoadLevel(_currentLevelIndex);
+    }
 
-      private void Awake()
+    public async void LoadLevel(int levelIndex)
+    {
+      if (levelIndex >= _levels.Length)
       {
-        LoadSettings();
+        int randomIndex = Random.Range(0, _levels.Length);
+
+        levelIndex = randomIndex;
       }
 
-      private void OnEnable()
+      if (levelIndex < _levels.Length)
       {
-        _uiButtonEvent = new EventBinding<EventStructs.UiButtonEvent>(LoadNextLevel);
-      }
+        Level level = _levels[levelIndex];
+        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(level.LevelAddressableKey);
 
-      private void OnDisable()
-      {
-        _uiButtonEvent.Remove(LoadNextLevel);
-      }
+        await handle.Task;
 
-      private void Start()
-      {
-        SetSavedLevel();
-        LoadLevel(_currentLevelIndex);
-      }
+        _currentLevelPrefab = handle.Result;
 
-      public async void LoadLevel(int levelIndex)
-      {
-        if (levelIndex >= _levels.Length)
-        {
-          int randomIndex = Random.Range(0, _levels.Length);
-
-          levelIndex = randomIndex;
-        }
-
-        if (levelIndex < _levels.Length)
-        {
-          Level level = _levels[levelIndex];
-          AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(level.LevelAddressableKey);
-
-          await handle.Task;
-
-          _currentLevelPrefab = handle.Result;
-
-          Instantiate(_currentLevelPrefab);
-
-          SettingsManager.SaveSettings(_gameSettings);
-        }
-      }
-
-      private void LoadNextLevel(EventStructs.UiButtonEvent uiButtonEvent)
-      {
-        if (uiButtonEvent.UiEnums != UiEnums.WinNextLevelButton) return;
-
-        _currentLevelIndex++;
-        _gameSettings.LevelIndex = _currentLevelIndex;
-
-        LoadLevel(_currentLevelIndex);
-      }
-
-      private void LoadSettings()
-      {
-        _gameSettings = SettingsManager.LoadSettings<GameSettings>();
-
-        if (_gameSettings == null)
-          _gameSettings = new GameSettings();
-      }
-
-      private void SetSavedLevel()
-      {
-        _currentLevelIndex = _gameSettings.LevelIndex;
+        Instantiate(_currentLevelPrefab);
       }
     }
+
+    private void LoadNextLevel(EventStructs.UiButtonEvent uiButtonEvent)
+    {
+      if (uiButtonEvent.UiEnums != UiEnums.WinNextLevelButton) return;
+
+      _currentLevelIndex++;
+      _gameSettings.LevelIndex = _currentLevelIndex;
+
+      if (_currentLevelIndex > _levels.Length)
+        _currentLevelIndex = Random.Range(0, _levels.Length);
+
+      SettingsManager.SaveSettings(_gameSettings);
+    }
+
+    private void LoadSettings()
+    {
+      _gameSettings = SettingsManager.LoadSettings<GameSettings>();
+
+      if (_gameSettings == null)
+        _gameSettings = new GameSettings();
+    }
+
+    private void SetSavedLevel()
+    {
+      _currentLevelIndex = _gameSettings.LevelIndex;
+    }
   }
+}
