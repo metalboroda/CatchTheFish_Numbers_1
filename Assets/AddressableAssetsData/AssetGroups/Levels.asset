@@ -18,7 +18,12 @@ MonoBehaviour:
   m_GUID: e3c63d8ab41115b4794e279463e7f421
   m_SerializeEntries:
   - m_GUID: 4ba9735d6fa2859478962215d8d1d86e
-    m_Address: Prefabs/Levels/Level_1
+    m_Address: Assets/__Game/Resources_moved/Prefabs/Levels/Level_1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 103284886f2584c44b8717e8e0ca2539
+    m_Address: Assets/__Game/Resources_moved/Prefabs/Levels/Level_2.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

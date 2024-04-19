@@ -80,7 +80,15 @@ namespace Assets.__Game.Scripts.Managers
         });
       });
 
-      _winNextLevelBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
+      _winNextLevelBtn.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.WinNextLevelButton
+        });
+
+        _gameBootstrapper.RestartLevel();
+      });
 
       _loseRestartBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
     }

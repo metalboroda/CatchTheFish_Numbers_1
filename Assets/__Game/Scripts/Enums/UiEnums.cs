@@ -2,6 +2,8 @@ namespace Assets.__Game.Scripts.Enums
 {
   public enum UiEnums
   {
-    QuestPlayButton
+    QuestPlayButton,
+    WinNextLevelButton,
+    LoseRestartLevelButton
   }
 }
