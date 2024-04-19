@@ -27,9 +27,11 @@ namespace Assets.__Game.Scripts.Managers
 
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
+    [SerializeField] private Button _winNextLevelBtn;
 
     [Header("Lose Canvas")]
     [SerializeField] private GameObject _loseCanvas;
+    [SerializeField] private Button _loseRestartBtn;
 
     private List<GameObject> _canvases = new();
     private int _currentScore;
@@ -77,6 +79,10 @@ namespace Assets.__Game.Scripts.Managers
           UiEnums = UiEnums.QuestPlayButton
         });
       });
+
+      _winNextLevelBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
+
+      _loseRestartBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
     }
 
     private void AddCanvasesToList()

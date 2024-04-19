@@ -1,6 +1,7 @@
 ﻿using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Game.States;
+using Assets.__Game.Scripts.Misc;
 using UnityEngine;
 
 namespace Assets.__Game.Scripts.Infrastructure
@@ -37,10 +38,22 @@ namespace Assets.__Game.Scripts.Infrastructure
 
     private void Start()
     {
-      StateMachine.Init(new GameQuestState(this));
+      SceneLoader.LoadSceneAsyncWithDelay(Hashes.GameScene, 2, this, () =>
+      {
+        StateMachine.Init(new GameQuestState(this));
 
-      EventBus<EventStructs.SendComponentEvent<GameBootstrapper>>.Raise(
-        new EventStructs.SendComponentEvent<GameBootstrapper> { Data = this });
+        EventBus<EventStructs.SendComponentEvent<GameBootstrapper>>.Raise(
+          new EventStructs.SendComponentEvent<GameBootstrapper> { Data = this });
+      });
+    }
+
+    public void RestartLevel()
+    {
+      SceneLoader.RestartSceneAsync(() =>
+      {
+        EventBus<EventStructs.SendComponentEvent<GameBootstrapper>>.Raise(
+          new EventStructs.SendComponentEvent<GameBootstrapper> { Data = this });
+      });
     }
 
     private void InitSingleton()
