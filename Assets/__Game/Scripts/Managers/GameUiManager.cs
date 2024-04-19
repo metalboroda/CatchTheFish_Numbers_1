@@ -6,6 +6,7 @@ namespace Assets.__Game.Scripts.Managers
 {
   public class GameUiManager : MonoBehaviour
   {
+    [Header("Game Canvas")]
     [Header("Score")]
     [SerializeField] private TextMeshProUGUI _scoreCounterTxt;
 
