@@ -464,9 +464,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361281dd7462df4478e1449a01261099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bubblesParticlesPrefab: {fileID: 7929217921800577076, guid: a719090e1e5b9b5409457ace3afce955, type: 3}
-  _starPrefab: {fileID: 0}
-  _angryFaceParticlesPrefab: {fileID: 1428483455149973157, guid: 0e46717c97ed5dc48a4704cd69dd851e, type: 3}
+  _bubblesParticlesPrefab: {fileID: 3413224358077903805, guid: 0a1fc9895c791b4488ad76b09d2a6254, type: 3}
+  _starPrefab: {fileID: 3413224358077903805, guid: 3e50bb781fb653044a1adb10febefe42, type: 3}
+  _angryFaceParticlesPrefab: {fileID: 3413224358077903805, guid: 2638d76f67d52f74ebc115abdf7abb89, type: 3}
 --- !u!1 &4036806635655805620
 GameObject:
   m_ObjectHideFlags: 0

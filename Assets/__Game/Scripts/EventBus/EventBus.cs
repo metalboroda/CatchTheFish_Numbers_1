@@ -5,265 +5,258 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
-
-namespace Assets.__Game.Scripts.EventBus
-{
 #endif
 
-  public static class EventBusUtility
-  {
-    public static IReadOnlyList<Type> EventTypes { get; private set; }
-    public static IReadOnlyList<Type> StaticEventBusesTypes { get; private set; }
+public static class EventBusUtility
+{
+  public static IReadOnlyList<Type> EventTypes { get; private set; }
+  public static IReadOnlyList<Type> StaticEventBusesTypes { get; private set; }
 
 #if UNITY_EDITOR
-    public static PlayModeStateChange PlayModeState { get; private set; }
+  public static PlayModeStateChange PlayModeState { get; private set; }
 
-    [InitializeOnLoadMethod]
-    public static void InitializeEditor()
-    {
-      EditorApplication.playModeStateChanged -= HandleEditorStateChange;
-      EditorApplication.playModeStateChanged += HandleEditorStateChange;
-    }
+  [InitializeOnLoadMethod]
+  public static void InitializeEditor()
+  {
+    EditorApplication.playModeStateChanged -= HandleEditorStateChange;
+    EditorApplication.playModeStateChanged += HandleEditorStateChange;
+  }
 
-    private static void HandleEditorStateChange(PlayModeStateChange state)
-    {
-      PlayModeState = state;
+  private static void HandleEditorStateChange(PlayModeStateChange state)
+  {
+    PlayModeState = state;
 
-      if (PlayModeState == PlayModeStateChange.EnteredEditMode)
-        ClearAllBuses();
-    }
+    if (PlayModeState == PlayModeStateChange.EnteredEditMode)
+      ClearAllBuses();
+  }
 #endif
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void Init()
+  [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+  public static void Init()
+  {
+    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+    Type[] assemblyCSharp = null;
+    Type[] assemblyCSharpFirstpass = null;
+
+    for (int i = 0; i < assemblies.Length; i++)
     {
-      var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-      Type[] assemblyCSharp = null;
-      Type[] assemblyCSharpFirstpass = null;
+      if (assemblies[i].GetName().Name == "Assembly-CSharp")
+        assemblyCSharp = assemblies[i].GetTypes();
+      else if (assemblies[i].GetName().Name == "Assembly-CSharp-firstpass")
+        assemblyCSharpFirstpass = assemblies[i].GetTypes();
 
-      for (int i = 0; i < assemblies.Length; i++)
-      {
-        if (assemblies[i].GetName().Name == "Assembly-CSharp")
-          assemblyCSharp = assemblies[i].GetTypes();
-        else if (assemblies[i].GetName().Name == "Assembly-CSharp-firstpass")
-          assemblyCSharpFirstpass = assemblies[i].GetTypes();
-
-        if (assemblyCSharp != null && assemblyCSharpFirstpass != null)
-          break;
-      }
-
-      List<Type> eventTypes = new List<Type>();
-
-      if (assemblyCSharp != null)
-      {
-        for (int i = 0; i < assemblyCSharp.Length; i++)
-        {
-          var type = assemblyCSharp[i].GetType();
-
-          if (typeof(IEvent) != type && typeof(IEvent).IsAssignableFrom(type))
-          {
-            eventTypes.Add(type);
-          }
-        }
-      }
-
-      if (assemblyCSharpFirstpass != null)
-      {
-        for (int i = 0; i < assemblyCSharpFirstpass.Length; i++)
-        {
-          var type = assemblyCSharpFirstpass[i].GetType();
-
-          if (typeof(IEvent) != type && typeof(IEvent).IsAssignableFrom(type))
-          {
-            eventTypes.Add(type);
-          }
-        }
-      }
-
-      EventTypes = eventTypes;
-
-      List<Type> staticEventBusesTypes = new List<Type>();
-      var typedef = typeof(EventBus<>);
-
-      for (int i = 0; i < EventTypes.Count; i++)
-      {
-        var type = EventTypes[i];
-        var gentype = typedef.MakeGenericType(type);
-
-        staticEventBusesTypes.Add(gentype);
-      }
-
-      StaticEventBusesTypes = staticEventBusesTypes;
+      if (assemblyCSharp != null && assemblyCSharpFirstpass != null)
+        break;
     }
 
-    public static void ClearAllBuses()
-    {
-      for (int i = 0; i < StaticEventBusesTypes.Count; i++)
-      {
-        var type = StaticEventBusesTypes[i];
-        var clearMethod = type.GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);
+    List<Type> eventTypes = new List<Type>();
 
-        if (clearMethod != null)
+    if (assemblyCSharp != null)
+    {
+      for (int i = 0; i < assemblyCSharp.Length; i++)
+      {
+        var type = assemblyCSharp[i].GetType();
+
+        if (typeof(IEvent) != type && typeof(IEvent).IsAssignableFrom(type))
         {
-          clearMethod.Invoke(null, null);
+          eventTypes.Add(type);
         }
+      }
+    }
+
+    if (assemblyCSharpFirstpass != null)
+    {
+      for (int i = 0; i < assemblyCSharpFirstpass.Length; i++)
+      {
+        var type = assemblyCSharpFirstpass[i].GetType();
+
+        if (typeof(IEvent) != type && typeof(IEvent).IsAssignableFrom(type))
+        {
+          eventTypes.Add(type);
+        }
+      }
+    }
+
+    EventTypes = eventTypes;
+
+    List<Type> staticEventBusesTypes = new List<Type>();
+    var typedef = typeof(EventBus<>);
+
+    for (int i = 0; i < EventTypes.Count; i++)
+    {
+      var type = EventTypes[i];
+      var gentype = typedef.MakeGenericType(type);
+
+      staticEventBusesTypes.Add(gentype);
+    }
+
+    StaticEventBusesTypes = staticEventBusesTypes;
+  }
+
+  public static void ClearAllBuses()
+  {
+    for (int i = 0; i < StaticEventBusesTypes.Count; i++)
+    {
+      var type = StaticEventBusesTypes[i];
+      var clearMethod = type.GetMethod("Clear", BindingFlags.Static | BindingFlags.NonPublic);
+
+      if (clearMethod != null)
+      {
+        clearMethod.Invoke(null, null);
       }
     }
   }
 }
 
-namespace Assets.__Game.Scripts.EventBus
+public static class EventBus<T> where T : struct, IEvent
 {
-  public static class EventBus<T> where T : struct, IEvent
+  private static EventBinding<T>[] bindings = new EventBinding<T>[64];
+  private static readonly List<Callback> callbacks = new List<Callback>();
+  private static int count;
+
+  public class Awaiter : EventBinding<T>
   {
-    private static EventBinding<T>[] bindings = new EventBinding<T>[64];
-    private static readonly List<Callback> callbacks = new List<Callback>();
-    private static int count;
+    public bool EventRaised { get; private set; }
+    public T Payload { get; private set; }
 
-    public class Awaiter : EventBinding<T>
+    public Awaiter() : base((Action)null)
     {
-      public bool EventRaised { get; private set; }
-      public T Payload { get; private set; }
-
-      public Awaiter() : base((Action)null)
-      {
-        ((IEventBinding<T>)this).OnEvent = OnEvent;
-      }
-
-      private void OnEvent(T ev)
-      {
-        EventRaised = true;
-        Payload = ev;
-      }
+      ((IEventBinding<T>)this).OnEvent = OnEvent;
     }
 
-    private struct Callback
+    private void OnEvent(T ev)
     {
-      public Action onEventNoArg;
-      public Action<T> onEvent;
+      EventRaised = true;
+      Payload = ev;
+    }
+  }
+
+  private struct Callback
+  {
+    public Action onEventNoArg;
+    public Action<T> onEvent;
+  }
+
+  private static void Clear()
+  {
+    bindings = new EventBinding<T>[64];
+    callbacks.Clear();
+    count = 0;
+  }
+
+  public static void Register(EventBinding<T> binding)
+  {
+    if (binding.Registered)
+      return;
+
+    if (bindings.Length <= count)
+    {
+      EventBinding<T>[] newarray = new EventBinding<T>[bindings.Length * 2];
+      Array.Copy(bindings, newarray, bindings.Length);
+
+      bindings = newarray;
     }
 
-    private static void Clear()
-    {
-      bindings = new EventBinding<T>[64];
-      callbacks.Clear();
-      count = 0;
-    }
+    binding.InternalIndex = count;
+    bindings[count] = binding;
 
-    public static void Register(EventBinding<T> binding)
-    {
-      if (binding.Registered)
-        return;
+    count++;
+  }
 
-      if (bindings.Length <= count)
-      {
-        EventBinding<T>[] newarray = new EventBinding<T>[bindings.Length * 2];
-        Array.Copy(bindings, newarray, bindings.Length);
+  public static void AddCallback(Action callback)
+  {
+    if (callback == null)
+      return;
 
-        bindings = newarray;
-      }
+    callbacks.Add(new Callback() { onEventNoArg = callback });
+  }
 
-      binding.InternalIndex = count;
-      bindings[count] = binding;
+  public static void AddCallback(Action<T> callback)
+  {
+    if (callback == null)
+      return;
 
-      count++;
-    }
+    callbacks.Add(new Callback() { onEvent = callback });
+  }
 
-    public static void AddCallback(Action callback)
-    {
-      if (callback == null)
-        return;
-
-      callbacks.Add(new Callback() { onEventNoArg = callback });
-    }
-
-    public static void AddCallback(Action<T> callback)
-    {
-      if (callback == null)
-        return;
-
-      callbacks.Add(new Callback() { onEvent = callback });
-    }
-
-    public static void Unregister(EventBinding<T> binding)
-    {
+  public static void Unregister(EventBinding<T> binding)
+  {
 #if UNITY_EDITOR
-      if (EventBusUtility.PlayModeState == PlayModeStateChange.ExitingPlayMode)
-        return;
+    if (EventBusUtility.PlayModeState == PlayModeStateChange.ExitingPlayMode)
+      return;
 #endif
-      int index = binding.InternalIndex;
+    int index = binding.InternalIndex;
 
-      if (index == -1 || index > count)
-      {
-        // Binding invalid
-        return;
-      }
+    if (index == -1 || index > count)
+    {
+      // Binding invalid
+      return;
+    }
 
-      if (bindings[index] != binding)
-      {
-        // Binding invalid
-        return;
-      }
+    if (bindings[index] != binding)
+    {
+      // Binding invalid
+      return;
+    }
 
-      if (index == count - 1)
-      {
-        bindings[count - 1] = null;
-        binding.InternalIndex = -1;
-        count--;
-
-        return;
-      }
-
-      int lastIndex = count - 1;
-      var last = bindings[lastIndex];
-
-      bindings[index] = last;
-      bindings[lastIndex] = null;
-
-      if (last != null)
-        last.InternalIndex = index;
+    if (index == count - 1)
+    {
+      bindings[count - 1] = null;
       binding.InternalIndex = -1;
-
       count--;
+
+      return;
     }
 
-    public static void Raise()
-    {
-      Raise(default);
-    }
+    int lastIndex = count - 1;
+    var last = bindings[lastIndex];
 
-    public static void Raise(T ev)
-    {
+    bindings[index] = last;
+    bindings[lastIndex] = null;
+
+    if (last != null)
+      last.InternalIndex = index;
+    binding.InternalIndex = -1;
+
+    count--;
+  }
+
+  public static void Raise()
+  {
+    Raise(default);
+  }
+
+  public static void Raise(T ev)
+  {
 #if UNITY_EDITOR
-      if (EventBusUtility.PlayModeState == PlayModeStateChange.ExitingPlayMode)
-        return;
+    if (EventBusUtility.PlayModeState == PlayModeStateChange.ExitingPlayMode)
+      return;
 #endif
-      for (int i = 0; i < count; i++)
-      {
-        IEventBinding<T> internalBind = bindings[i];
-        internalBind.OnEvent?.Invoke(ev);
-        internalBind.OnEventArgs?.Invoke();
-      }
-
-      for (int i = 0; i < callbacks.Count; i++)
-      {
-        callbacks[i].onEvent?.Invoke(ev);
-        callbacks[i].onEventNoArg?.Invoke();
-      }
-
-      callbacks.Clear();
-    }
-
-    public static string GetDebugInfoString()
+    for (int i = 0; i < count; i++)
     {
-      return "Bindings: " + count + " BufferSize: " + bindings.Length + "\n"
-          + "Callbacks: " + callbacks.Count;
+      IEventBinding<T> internalBind = bindings[i];
+      internalBind.OnEvent?.Invoke(ev);
+      internalBind.OnEventArgs?.Invoke();
     }
 
-    public static Awaiter NewAwaiter()
+    for (int i = 0; i < callbacks.Count; i++)
     {
-      // TODO: do it non alloc
-      return new Awaiter();
+      callbacks[i].onEvent?.Invoke(ev);
+      callbacks[i].onEventNoArg?.Invoke();
     }
+
+    callbacks.Clear();
+  }
+
+  public static string GetDebugInfoString()
+  {
+    return "Bindings: " + count + " BufferSize: " + bindings.Length + "\n"
+        + "Callbacks: " + callbacks.Count;
+  }
+
+  public static Awaiter NewAwaiter()
+  {
+    // TODO: do it non alloc
+    return new Awaiter();
   }
 }

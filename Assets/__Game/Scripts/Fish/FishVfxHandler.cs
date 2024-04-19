@@ -27,15 +27,7 @@ namespace Assets.__Game.Scripts.Fish
     {
       if (fishDestroyEvent.FishId != transform.GetInstanceID()) return;
 
-      if (fishDestroyEvent.Correct == true)
-      {
-        //SpawnParticle(_starPrefab);
-      }
-      else
-      {
-        SpawnParticle(_angryFaceParticlesPrefab);
-      }
-
+      SpawnParticle(fishDestroyEvent.Correct ? _starPrefab : _angryFaceParticlesPrefab);
       SpawnParticle(_bubblesParticlesPrefab);
     }
 

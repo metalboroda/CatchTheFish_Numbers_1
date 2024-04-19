@@ -32,12 +32,15 @@ namespace Assets.__Game.Scripts.Infrastructure
 
     private void OnDisable()
     {
-
+      _uiButtonEvent.Remove(ChangeState);
     }
 
     private void Start()
     {
       StateMachine.Init(new GameQuestState(this));
+
+      EventBus<EventStructs.SendComponentEvent<GameBootstrapper>>.Raise(
+        new EventStructs.SendComponentEvent<GameBootstrapper> { Data = this });
     }
 
     private void InitSingleton()
@@ -58,8 +61,6 @@ namespace Assets.__Game.Scripts.Infrastructure
     {
       switch (uiButtonEvent.UiEnums)
       {
-        case UiEnums.MainMenuPlayButton:
-          break;
         case UiEnums.QuestPlayButton:
           StateMachine.ChangeState(new GameplayState(this));
           break;

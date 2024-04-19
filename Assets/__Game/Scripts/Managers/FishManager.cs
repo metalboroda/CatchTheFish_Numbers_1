@@ -53,6 +53,7 @@ namespace Assets.__Game.Scripts.Managers
 
           EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
           {
+            CorrectFish = true,
             CorrectFishIncrement = 1
           });
 
@@ -66,6 +67,7 @@ namespace Assets.__Game.Scripts.Managers
 
           EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
           {
+            CorrectFish = false,
             IncorrectFishIncrement = 1
           });
 

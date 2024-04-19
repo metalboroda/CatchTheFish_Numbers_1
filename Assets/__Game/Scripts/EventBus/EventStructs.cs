@@ -27,6 +27,7 @@ namespace Assets.__Game.Scripts.EventBus
     #region Fish Manager
     public struct FishReceivedEvent : IEvent
     {
+      public bool CorrectFish;
       public int[] CorrectNumbers;
       public int CorrectFishIncrement;
       public int IncorrectFishIncrement;
@@ -58,6 +59,13 @@ namespace Assets.__Game.Scripts.EventBus
     public struct UiButtonEvent : IEvent
     {
       public UiEnums UiEnums;
+    }
+    #endregion
+
+    #region Components
+    public struct SendComponentEvent<T> : IEvent
+    {
+      public T Data { get; set; }
     }
     #endregion
   }
