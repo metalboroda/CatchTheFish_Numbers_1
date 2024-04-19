@@ -1,6 +1,8 @@
 using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Fish;
 using System.Collections.Generic;
+using Assets.__Game.Scripts.Game.States;
+using Assets.__Game.Scripts.Infrastructure;
 using Assets.__Game.Scripts.SOs;
 using UnityEngine;
 
@@ -15,6 +17,13 @@ namespace Assets.__Game.Scripts.Managers
 
     private EventBinding<EventStructs.FishSpawnerEvent> _fishSpawnerEvent;
     private EventBinding<EventStructs.FishClickEvent> _fishClickEvent;
+
+    private GameBootstrapper _gameBootstrapper;
+
+    private void Awake()
+    {
+      _gameBootstrapper = GameBootstrapper.Instance;
+    }
 
     private void OnEnable()
     {
@@ -80,11 +89,13 @@ namespace Assets.__Game.Scripts.Managers
 
     private void CheckFishLists()
     {
+      if(_gameBootstrapper == null) return;
+
       if (_correctNumberFish.Count == 0)
-        Debug.Log("Win");
+        _gameBootstrapper.StateMachine.ChangeState(new GameWinState(_gameBootstrapper));
 
       if (_incorrectNumberFish.Count == 0)
-        Debug.Log("Lose");
+        _gameBootstrapper.StateMachine.ChangeState(new GameLoseState(_gameBootstrapper));
     }
   }
 }

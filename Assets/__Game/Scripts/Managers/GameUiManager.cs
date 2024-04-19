@@ -141,6 +141,12 @@ namespace Assets.__Game.Scripts.Managers
         case GameplayState:
           SwitchCanvas(_gameCanvas);
           break;
+        case GameWinState:
+          SwitchCanvas(_winCanvas);
+          break;
+        case GameLoseState:
+          SwitchCanvas(_loseCanvas);
+          break;
       }
     }
 
