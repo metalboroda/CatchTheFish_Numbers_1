@@ -619,7 +619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 75bd0dee83d00854f869970e19d134e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dfc3940ac4d3ac74fae637fbabb43661, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -753,7 +753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: COLLECT FISH WITH THOSE NUMBERS
+  m_text: KLL FISH WITH THOSE NUMBERS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
   m_sharedMaterial: {fileID: 3070753095902059671, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
@@ -780,7 +780,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.55
+  m_fontSize: 87.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3202,8 +3202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 / 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f6bcd18ecb08df445bce0c9fa7b9cdc5, type: 2}
-  m_sharedMaterial: {fileID: 3070753095902059671, guid: f6bcd18ecb08df445bce0c9fa7b9cdc5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f7b62e6520965304ebdeb1224512bf1d, type: 2}
+  m_sharedMaterial: {fileID: 3070753095902059671, guid: f7b62e6520965304ebdeb1224512bf1d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3685,7 +3685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0681aac428c48dd4d96ce00781781a91, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e984b79e595881f41b4a6d6a26bea0d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4107,8 +4107,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f6bcd18ecb08df445bce0c9fa7b9cdc5, type: 2}
-  m_sharedMaterial: {fileID: 3070753095902059671, guid: f6bcd18ecb08df445bce0c9fa7b9cdc5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f7b62e6520965304ebdeb1224512bf1d, type: 2}
+  m_sharedMaterial: {fileID: 3070753095902059671, guid: f7b62e6520965304ebdeb1224512bf1d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5457,7 +5457,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: QUEST
+  m_text: MISSION
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
   m_sharedMaterial: {fileID: 3070753095902059671, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
@@ -5484,7 +5484,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 131.2
+  m_fontSize: 107.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

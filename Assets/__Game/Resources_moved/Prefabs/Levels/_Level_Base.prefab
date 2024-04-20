@@ -150,10 +150,10 @@ MonoBehaviour:
   _correctNumbersContainerSo: {fileID: 11400000, guid: ac2ac9823212fa8488a12aae31a0df98, type: 2}
   _fishToSpawn:
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
-    FishNumber: 1
+    FishNumber: 13
     Amount: 1
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
-    FishNumber: 2
+    FishNumber: 666
     Amount: 1
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishNumber: 3

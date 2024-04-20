@@ -19,7 +19,7 @@ namespace Assets.__Game.Scripts.Audio
       _audioTool = new AudioTool(_audioSource);
     }
 
-    private void Start()
+    private void OnEnable()
     {
       PlayRandomCLip();
     }
