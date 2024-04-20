@@ -10,6 +10,7 @@ namespace Assets.__Game.Scripts.Managers
   {
     [SerializeField] private Level[] _levels;
 
+    private int _overallLevelIndex = 0;
     private int _currentLevelIndex = 0;
     private GameObject _currentLevelPrefab;
 
@@ -64,6 +65,8 @@ namespace Assets.__Game.Scripts.Managers
     {
       if (uiButtonEvent.UiEnums != UiEnums.WinNextLevelButton) return;
 
+      _overallLevelIndex++;
+      _gameSettings.OverallLevelIndex = _overallLevelIndex;
       _currentLevelIndex++;
       _gameSettings.LevelIndex = _currentLevelIndex;
 

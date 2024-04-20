@@ -104,7 +104,11 @@ namespace Assets.__Game.Scripts.Managers
 
         _gameBootstrapper.RestartLevel();
       });
-      _winRewardButton.onClick.AddListener(() => { _reward.OpenRandomWikipediaFishLink(); });
+      _winRewardButton.onClick.AddListener(() =>
+      {
+        _reward.OpenRandomWikipediaFishLink();
+        _winRewardButton.gameObject.SetActive(false);
+      });
 
       _loseRestartBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
     }

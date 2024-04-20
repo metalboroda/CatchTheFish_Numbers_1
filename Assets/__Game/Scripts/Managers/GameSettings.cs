@@ -10,6 +10,7 @@ namespace Assets.__Game.Scripts.Managers
     #endregion
 
     #region LevelManager
+    public int OverallLevelIndex;
     public int LevelIndex;
     #endregion
 
