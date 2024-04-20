@@ -32,6 +32,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1f340cdc4f866c4eb732989a95b4cad
+    m_Address: Assets/__Game/Resources_moved/Prefabs/Levels/Level_4.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 18e52dc69c5df774bb5af9cb2f7ac97b
+    m_Address: Assets/__Game/Resources_moved/Prefabs/Levels/Level_5.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 846d18a594477424bb89afcc09cb8c62, type: 2}
   m_SchemaSet:
