@@ -6,6 +6,7 @@ namespace Assets.__Game.Scripts.LevelItems
   public class Reward
   {
     private string[] _fishList;
+    private string _previousFish;
 
     public Reward()
     {
@@ -23,9 +24,15 @@ namespace Assets.__Game.Scripts.LevelItems
 
     public void OpenRandomWikipediaFishLink()
     {
-      string randomFish = _fishList[Random.Range(0, _fishList.Length)];
-      string wikipediaLink = "https://en.wikipedia.org/wiki/" + randomFish;
+      string randomFish;
+      do
+      {
+        randomFish = _fishList[Random.Range(0, _fishList.Length)];
+      } while (randomFish == _previousFish);
 
+      _previousFish = randomFish;
+
+      string wikipediaLink = "https://en.wikipedia.org/wiki/" + randomFish;
       Application.OpenURL(wikipediaLink);
     }
   }
