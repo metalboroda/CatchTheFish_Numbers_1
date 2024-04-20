@@ -51,6 +51,8 @@ namespace Assets.__Game.Scripts.Infrastructure
     {
       SceneLoader.RestartSceneAsync(() =>
       {
+        StateMachine.Init(new GameQuestState(this));
+
         EventBus<EventStructs.SendComponentEvent<GameBootstrapper>>.Raise(
           new EventStructs.SendComponentEvent<GameBootstrapper> { Data = this });
       });

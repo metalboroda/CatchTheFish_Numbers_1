@@ -110,7 +110,15 @@ namespace Assets.__Game.Scripts.Managers
         _winRewardButton.gameObject.SetActive(false);
       });
 
-      _loseRestartBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
+      _loseRestartBtn.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.LoseRestartLevelButton
+        });
+
+        _gameBootstrapper.RestartLevel();
+      });
     }
 
     private void AddCanvasesToList()
