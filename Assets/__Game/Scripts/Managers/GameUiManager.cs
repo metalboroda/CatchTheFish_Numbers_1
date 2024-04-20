@@ -4,6 +4,7 @@ using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Game.States;
 using Assets.__Game.Scripts.Infrastructure;
+using Assets.__Game.Scripts.LevelItems;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -21,13 +22,20 @@ namespace Assets.__Game.Scripts.Managers
     [Header("Game Canvas")]
     [SerializeField] private GameObject _gameCanvas;
     [SerializeField] private TextMeshProUGUI _gameScoreCounterTxt;
-    [SerializeField] public GameObject _gameStarIcon;
-    [SerializeField] public float _gameStarScaleIn = 1.15f;
-    [SerializeField] public float _gameStarAnimDuration = 0.25f;
+    [SerializeField] private GameObject _gameStarIcon;
+
+    [Space]
+    [SerializeField] private TextMeshProUGUI _gameLoseCounterTxt;
+    [SerializeField] private GameObject _gameAngryFaceIcon;
+
+    [Space]
+    [SerializeField] private float _gameIconScaleIn = 1.3f;
+    [SerializeField] private float _gameIconAnimDuration = 0.15f;
 
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
     [SerializeField] private Button _winNextLevelBtn;
+    [SerializeField] private Button _winRewardButton;
 
     [Header("Lose Canvas")]
     [SerializeField] private GameObject _loseCanvas;
@@ -36,13 +44,20 @@ namespace Assets.__Game.Scripts.Managers
     private List<GameObject> _canvases = new();
     private int _currentScore;
     private int _overallScore;
+    private int _currentLoses;
 
     private GameBootstrapper _gameBootstrapper;
+    private Reward _reward;
 
     private EventBinding<EventStructs.SendComponentEvent<GameBootstrapper>> _componentEvent;
     private EventBinding<EventStructs.StateChanged> _stateChanged;
     private EventBinding<EventStructs.FishSpawnerEvent> _fishSpawnerEvent;
     private EventBinding<EventStructs.FishReceivedEvent> _fishReceivedEvent;
+
+    private void Awake()
+    {
+      _reward = new Reward();
+    }
 
     private void OnEnable()
     {
@@ -51,7 +66,7 @@ namespace Assets.__Game.Scripts.Managers
       _fishSpawnerEvent = new EventBinding<EventStructs.FishSpawnerEvent>(SetOverallScore);
       _fishReceivedEvent = new EventBinding<EventStructs.FishReceivedEvent>(DisplayScore);
       _fishReceivedEvent = new EventBinding<EventStructs.FishReceivedEvent>(DisplayCorrectNumbersArray);
-      _fishReceivedEvent = new EventBinding<EventStructs.FishReceivedEvent>(StarIconScaleAnimation);
+      _fishReceivedEvent = new EventBinding<EventStructs.FishReceivedEvent>(IconScaleAnimation);
     }
 
     private void OnDisable()
@@ -61,7 +76,7 @@ namespace Assets.__Game.Scripts.Managers
       _fishSpawnerEvent.Remove(SetOverallScore);
       _fishReceivedEvent.Remove(DisplayScore);
       _fishReceivedEvent.Remove(DisplayCorrectNumbersArray);
-      _fishReceivedEvent.Remove(StarIconScaleAnimation);
+      _fishReceivedEvent.Remove(IconScaleAnimation);
     }
 
     private void Start()
@@ -89,6 +104,7 @@ namespace Assets.__Game.Scripts.Managers
 
         _gameBootstrapper.RestartLevel();
       });
+      _winRewardButton.onClick.AddListener(() => { _reward.OpenRandomWikipediaFishLink(); });
 
       _loseRestartBtn.onClick.AddListener(() => { _gameBootstrapper.RestartLevel(); });
     }
@@ -114,8 +130,16 @@ namespace Assets.__Game.Scripts.Managers
 
     private void DisplayScore(EventStructs.FishReceivedEvent fishReceivedEvent)
     {
-      _currentScore += fishReceivedEvent.CorrectFishIncrement;
-      _gameScoreCounterTxt.text = $"{_currentScore} / {_overallScore}";
+      if (fishReceivedEvent.CorrectFish == true)
+      {
+        _currentScore += fishReceivedEvent.CorrectFishIncrement;
+        _gameScoreCounterTxt.text = $"{_currentScore} / {_overallScore}";
+      }
+      else
+      {
+        _currentLoses += fishReceivedEvent.IncorrectFishIncrement;
+        _gameLoseCounterTxt.text = $"{_currentLoses}";
+      }
     }
 
     private void DisplayCorrectNumbersArray(EventStructs.FishReceivedEvent fishReceivedEvent)
@@ -135,14 +159,18 @@ namespace Assets.__Game.Scripts.Managers
       _questCorrectNumbersTxt.text = arrayString;
     }
 
-    private void StarIconScaleAnimation(EventStructs.FishReceivedEvent fishReceivedEvent)
+    private void IconScaleAnimation(EventStructs.FishReceivedEvent fishReceivedEvent)
     {
-      if (fishReceivedEvent.CorrectFish == false) return;
-
       Sequence seq = DOTween.Sequence();
+      Transform icon = null;
 
-      seq.Append(_gameStarIcon.transform.DOScale(_gameStarScaleIn, _gameStarAnimDuration));
-      seq.Append(_gameStarIcon.transform.DOScale(1f, _gameStarAnimDuration));
+      if (fishReceivedEvent.CorrectFish == true)
+        icon = _gameStarIcon.transform;
+      else
+        icon = _gameAngryFaceIcon.transform;
+
+      seq.Append(icon.DOScale(_gameIconScaleIn, _gameIconAnimDuration));
+      seq.Append(icon.DOScale(1f, _gameIconAnimDuration));
     }
 
     private void SwitchCanvasesDependsOnState(EventStructs.StateChanged state)
@@ -157,6 +185,7 @@ namespace Assets.__Game.Scripts.Managers
           break;
         case GameWinState:
           SwitchCanvas(_winCanvas);
+          TryToEnableReward();
           break;
         case GameLoseState:
           SwitchCanvas(_loseCanvas);
@@ -180,6 +209,13 @@ namespace Assets.__Game.Scripts.Managers
         else
           canvasItem.SetActive(false);
       }
+    }
+
+    private void TryToEnableReward()
+    {
+      if (_currentLoses > 0) return;
+
+      _winRewardButton.gameObject.SetActive(true);
     }
   }
 }
