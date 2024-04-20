@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Assets.__Game.Scripts.Audio
 {
@@ -13,10 +15,9 @@ namespace Assets.__Game.Scripts.Audio
     [SerializeField] private AudioMixer _musicMixer;
 
     [Space]
-    [SerializeField] private AudioClip[] _soundtracks;
+    [SerializeField] private AddressableAudioClip[] _soundtrackClips;
 
     private List<int> _previousTracks = new List<int>();
-
     private bool _isPaused = false;
 
     private AudioSource _audioSource;
@@ -30,7 +31,6 @@ namespace Assets.__Game.Scripts.Audio
         Instance = this;
 
         DontDestroyOnLoad(gameObject);
-
         StartCoroutine(DoPlaySoundtracks());
       }
       else
@@ -46,20 +46,28 @@ namespace Assets.__Game.Scripts.Audio
         if (!_isPaused)
         {
           int randomIndex = GetRandomTrackIndex();
+          var loadOperation = Addressables.LoadAssetAsync<AudioClip>(_soundtrackClips[randomIndex].ClipAddressableKey);
 
-          _audioSource.clip = _soundtracks[randomIndex];
-          _audioSource.Play();
+          yield return loadOperation;
 
-          while (_audioSource.isPlaying)
+          if (loadOperation.Status == AsyncOperationStatus.Succeeded)
           {
-            yield return null;
+            _audioSource.clip = loadOperation.Result;
+            _audioSource.Play();
+
+            while (_audioSource.isPlaying)
+            {
+              yield return null;
+            }
+
+            _previousTracks.Add(randomIndex);
+
+            if (_previousTracks.Count > 2)
+              _previousTracks.RemoveAt(0);
           }
-
-          _previousTracks.Add(randomIndex);
-
-          if (_previousTracks.Count > 2)
+          else
           {
-            _previousTracks.RemoveAt(0);
+            Debug.LogError("Failed to load audio clip: " + _soundtrackClips[randomIndex].ClipAddressableKey);
           }
         }
         else
@@ -75,7 +83,7 @@ namespace Assets.__Game.Scripts.Audio
 
       do
       {
-        randomIndex = Random.Range(0, _soundtracks.Length);
+        randomIndex = UnityEngine.Random.Range(0, _soundtrackClips.Length);
       } while (_previousTracks.Contains(randomIndex));
 
       return randomIndex;
