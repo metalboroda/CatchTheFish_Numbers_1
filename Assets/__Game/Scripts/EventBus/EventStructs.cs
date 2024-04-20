@@ -62,6 +62,10 @@ namespace Assets.__Game.Scripts.EventBus
     }
     #endregion
 
+    #region Audio
+    public struct AudioSwitchedEvent : IEvent { }
+    #endregion
+
     #region Components
     public struct SendComponentEvent<T> : IEvent
     {

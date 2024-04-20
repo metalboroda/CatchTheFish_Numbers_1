@@ -20,5 +20,9 @@ namespace Assets.__Game.Scripts.Misc
     public const string RoyalGramma = "Royal_gramma";
     public const string CopperbandButterflyfish = "Copperband_butterflyfish";
     #endregion
+
+    #region Audio
+    public const string MasterVolume = "MasterVolume";
+    #endregion
   }
 }

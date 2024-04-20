@@ -23,14 +23,16 @@ namespace Assets.__Game.Scripts.Managers
     [SerializeField] private GameObject _gameCanvas;
     [SerializeField] private TextMeshProUGUI _gameScoreCounterTxt;
     [SerializeField] private GameObject _gameStarIcon;
-
     [Space]
     [SerializeField] private TextMeshProUGUI _gameLoseCounterTxt;
     [SerializeField] private GameObject _gameAngryFaceIcon;
-
     [Space]
     [SerializeField] private float _gameIconScaleIn = 1.3f;
     [SerializeField] private float _gameIconAnimDuration = 0.15f;
+    [Space]
+    [SerializeField] private Button _gameAudioBtn;
+    [SerializeField] private GameObject _gameAudioOnIcon;
+    [SerializeField] private GameObject _gameAudioOffIcon;
 
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
@@ -48,6 +50,7 @@ namespace Assets.__Game.Scripts.Managers
 
     private GameBootstrapper _gameBootstrapper;
     private Reward _reward;
+    private GameSettings _gameSettings;
 
     private EventBinding<EventStructs.SendComponentEvent<GameBootstrapper>> _componentEvent;
     private EventBinding<EventStructs.StateChanged> _stateChanged;
@@ -57,6 +60,9 @@ namespace Assets.__Game.Scripts.Managers
     private void Awake()
     {
       _reward = new Reward();
+      _gameSettings = new GameSettings();
+
+      LoadSettings();
     }
 
     private void OnEnable()
@@ -83,6 +89,15 @@ namespace Assets.__Game.Scripts.Managers
     {
       SubscribeButtons();
       AddCanvasesToList();
+      UpdateAudioButtonVisuals();
+    }
+
+    private void LoadSettings()
+    {
+      _gameSettings = SettingsManager.LoadSettings<GameSettings>();
+
+      if (_gameSettings == null)
+        _gameSettings = new GameSettings();
     }
 
     private void SubscribeButtons()
@@ -94,6 +109,8 @@ namespace Assets.__Game.Scripts.Managers
           UiEnums = UiEnums.QuestPlayButton
         });
       });
+
+      _gameAudioBtn.onClick.AddListener(SwitchAudioVolumeButton);
 
       _winNextLevelBtn.onClick.AddListener(() =>
       {
@@ -228,6 +245,21 @@ namespace Assets.__Game.Scripts.Managers
       if (_currentLoses > 0) return;
 
       _winRewardButton.gameObject.SetActive(true);
+    }
+
+    private void SwitchAudioVolumeButton()
+    {
+      _gameSettings.IsMusicOn = !_gameSettings.IsMusicOn;
+
+      UpdateAudioButtonVisuals();
+      EventBus<EventStructs.AudioSwitchedEvent>.Raise();
+      SettingsManager.SaveSettings(_gameSettings);
+    }
+
+    private void UpdateAudioButtonVisuals()
+    {
+      _gameAudioOnIcon.SetActive(_gameSettings.IsMusicOn);
+      _gameAudioOffIcon.SetActive(!_gameSettings.IsMusicOn);
     }
   }
 }
