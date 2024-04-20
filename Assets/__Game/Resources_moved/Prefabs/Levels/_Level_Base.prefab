@@ -150,10 +150,10 @@ MonoBehaviour:
   _correctNumbersContainerSo: {fileID: 11400000, guid: ac2ac9823212fa8488a12aae31a0df98, type: 2}
   _fishToSpawn:
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
-    FishNumber: 13
+    FishNumber: 1
     Amount: 1
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
-    FishNumber: 666
+    FishNumber: 2
     Amount: 1
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishNumber: 3
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 6978062777282072624}
   - component: {fileID: 2078096775953326213}
   m_Layer: 0
-  m_Name: Level_1
+  m_Name: BackgroundImg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -329,7 +329,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1b9bedf8bd8618e44bec3293fd13deff, type: 3}
-  m_Color: {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 953424317534044380, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7436d10dc47d1eb429bb4700f6f660bb, type: 2}
+      objectReference: {fileID: 2100000, guid: 7b2167e4544b0cd4c8c30cc3abc83aaf, type: 2}
     - target: {fileID: 5115810687899775471, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -119,5 +119,126 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7929217921800577076, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3099464524612263854}
+    - targetCorrespondingSourceObject: {fileID: 7929217921800577076, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8841099257670785990}
   m_SourcePrefab: {fileID: 100100000, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
+--- !u!1 &3413224358077903805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7929217921800577076, guid: 48fce82c00bb4ff468ecc3ef65154b5b, type: 3}
+  m_PrefabInstance: {fileID: 4707397167179109257}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &3099464524612263854
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413224358077903805}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6480035649268931048, guid: e5f93ecdc894adc4c91b802da2f07a4b, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &8841099257670785990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413224358077903805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8640ab7a4e1fe14587839b8a48f2a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clips:
+  - {fileID: 8300000, guid: b99a4832da34d72418e608edaae1ab26, type: 3}

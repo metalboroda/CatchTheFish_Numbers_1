@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c899d8a6363e5fb4687180bcc2fb33df, type: 3}
   m_Name: CorrectNumbersContainer
   m_EditorClassIdentifier: 
-  _correctNumbers: 0d0000009a020000
+  _correctNumbers: 0100000002000000
