@@ -831,7 +831,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: COLLECT FISH WITH THOSE NUMBERS
+  m_text: CATCH FISH WITH THOSE NUMBERS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
   m_sharedMaterial: {fileID: 3070753095902059671, guid: 5a493533a239f924a95bffee07bde36b, type: 2}
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 86.55
+  m_fontSize: 87.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2519,7 +2519,7 @@ MonoBehaviour:
   targetGO: {fileID: 0}
   tweenTargetIsTargetGO: 1
   delay: 0
-  duration: 1
+  duration: 1.5
   easeType: 3
   easeCurve:
     serializedVersion: 2
