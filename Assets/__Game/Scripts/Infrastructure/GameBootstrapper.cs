@@ -1,5 +1,4 @@
-﻿using Assets.__Game.Scripts.Database;
-using Assets.__Game.Scripts.Enums;
+﻿using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Game.States;
 using Assets.__Game.Scripts.Misc;
@@ -13,13 +12,11 @@ namespace Assets.__Game.Scripts.Infrastructure
 
     public StateMachine StateMachine;
     public SceneLoader SceneLoader;
-    public DatabaseManager DatabaseManager;
 
     public GameBootstrapper()
     {
       StateMachine = new StateMachine();
       SceneLoader = new SceneLoader();
-      DatabaseManager = new DatabaseManager();
     }
 
     private EventBinding<EventStructs.UiButtonEvent> _uiButtonEvent;
