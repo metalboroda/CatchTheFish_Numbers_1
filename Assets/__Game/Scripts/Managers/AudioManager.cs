@@ -47,10 +47,10 @@ namespace Assets.__Game.Scripts.Managers
 
     private void LoadSettings()
     {
+      _gameSettings = SettingsManager.LoadSettings<GameSettings>();
+
       if (_gameSettings == null)
         _gameSettings = new GameSettings();
-
-      _gameSettings = SettingsManager.LoadSettings<GameSettings>();
     }
 
     private void LoadVolumes()
