@@ -79,6 +79,12 @@ namespace Assets.__Game.Scripts.Infrastructure
         case UiEnums.QuestPlayButton:
           StateMachine.ChangeState(new GameplayState(this));
           break;
+        case UiEnums.GamePauseButton:
+          StateMachine.ChangeState(new GamePauseState(this));
+          break;
+        case UiEnums.PauseContinueButton:
+          StateMachine.ChangeState(new GameplayState(this));
+          break;
       }
     }
   }

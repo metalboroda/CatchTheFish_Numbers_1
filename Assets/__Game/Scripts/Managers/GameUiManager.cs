@@ -27,12 +27,10 @@ namespace Assets.__Game.Scripts.Managers
     [SerializeField] private TextMeshProUGUI _gameLoseCounterTxt;
     [SerializeField] private GameObject _gameAngryFaceIcon;
     [Space]
+    [SerializeField] private Button _gamePauseButton;
+    [Space]
     [SerializeField] private float _gameIconScaleIn = 1.3f;
     [SerializeField] private float _gameIconAnimDuration = 0.15f;
-    [Space]
-    [SerializeField] private Button _gameAudioBtn;
-    [SerializeField] private GameObject _gameAudioOnIcon;
-    [SerializeField] private GameObject _gameAudioOffIcon;
 
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
@@ -43,7 +41,17 @@ namespace Assets.__Game.Scripts.Managers
     [SerializeField] private GameObject _loseCanvas;
     [SerializeField] private Button _loseRestartBtn;
 
-    private List<GameObject> _canvases = new();
+    [Header("Pause Canvas")]
+    [SerializeField] private GameObject _pauseCanvas;
+    [SerializeField] private TextMeshProUGUI _pauseCorrectNumbersTxt;
+    [SerializeField] private Button _pauseContinueBtn;
+    [SerializeField] private Button _pauseRestartButton;
+    [Space]
+    [SerializeField] private Button _pauseAudioBtn;
+    [SerializeField] private GameObject _pauseAudioOnIcon;
+    [SerializeField] private GameObject _pauseAudioOffIcon;
+
+    private readonly List<GameObject> _canvases = new();
     private int _currentScore;
     private int _overallScore;
     private int _currentLoses;
@@ -102,6 +110,7 @@ namespace Assets.__Game.Scripts.Managers
 
     private void SubscribeButtons()
     {
+      // Quest
       _questPlayButton.onClick.AddListener(() =>
       {
         EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
@@ -110,8 +119,16 @@ namespace Assets.__Game.Scripts.Managers
         });
       });
 
-      _gameAudioBtn.onClick.AddListener(SwitchAudioVolumeButton);
+      // Game
+      _gamePauseButton.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.GamePauseButton
+        });
+      });
 
+      // Win
       _winNextLevelBtn.onClick.AddListener(() =>
       {
         EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
@@ -127,6 +144,7 @@ namespace Assets.__Game.Scripts.Managers
         _winRewardButton.gameObject.SetActive(false);
       });
 
+      // Lose
       _loseRestartBtn.onClick.AddListener(() =>
       {
         EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
@@ -136,6 +154,20 @@ namespace Assets.__Game.Scripts.Managers
 
         _gameBootstrapper.RestartLevel();
       });
+
+      // Pause
+      _pauseContinueBtn.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.PauseContinueButton
+        });
+      });
+      _pauseRestartButton.onClick.AddListener(() =>
+      {
+        _gameBootstrapper.RestartLevel();
+      });
+      _pauseAudioBtn.onClick.AddListener(SwitchAudioVolumeButton);
     }
 
     private void AddCanvasesToList()
@@ -144,6 +176,7 @@ namespace Assets.__Game.Scripts.Managers
       _canvases.Add(_gameCanvas);
       _canvases.Add(_winCanvas);
       _canvases.Add(_loseCanvas);
+      _canvases.Add(_pauseCanvas);
     }
 
     private void SetBootstrapper(EventStructs.SendComponentEvent<GameBootstrapper> componentEvent)
@@ -186,6 +219,7 @@ namespace Assets.__Game.Scripts.Managers
       }
 
       _questCorrectNumbersTxt.text = arrayString;
+      _pauseCorrectNumbersTxt.text = arrayString;
     }
 
     private void IconScaleAnimation(EventStructs.FishReceivedEvent fishReceivedEvent)
@@ -218,6 +252,9 @@ namespace Assets.__Game.Scripts.Managers
           break;
         case GameLoseState:
           SwitchCanvas(_loseCanvas);
+          break;
+        case GamePauseState:
+          SwitchCanvas(_pauseCanvas);
           break;
       }
     }
@@ -258,8 +295,8 @@ namespace Assets.__Game.Scripts.Managers
 
     private void UpdateAudioButtonVisuals()
     {
-      _gameAudioOnIcon.SetActive(_gameSettings.IsMusicOn);
-      _gameAudioOffIcon.SetActive(!_gameSettings.IsMusicOn);
+      _pauseAudioOnIcon.SetActive(_gameSettings.IsMusicOn);
+      _pauseAudioOffIcon.SetActive(!_gameSettings.IsMusicOn);
     }
   }
 }

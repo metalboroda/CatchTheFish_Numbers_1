@@ -9,10 +9,9 @@ namespace Assets.__Game.Scripts.Audio
   public class AudioUiHandler : MonoBehaviour
   {
     [SerializeField] private AudioClip _questScreenClip;
-    [Space]
     [SerializeField] private AudioClip _winScreenClip;
-    [Space]
     [SerializeField] private AudioClip _loseScreenClip;
+    [SerializeField] private AudioClip _pauseScreenClip;
     [Space]
     [SerializeField] private AudioClip _buttonClip;
 
@@ -56,6 +55,9 @@ namespace Assets.__Game.Scripts.Audio
           break;
         case GameLoseState:
           _audioSource.PlayOneShot(_loseScreenClip);
+          break;
+        case GamePauseState:
+          _audioSource.PlayOneShot(_pauseScreenClip);
           break;
       }
     }
