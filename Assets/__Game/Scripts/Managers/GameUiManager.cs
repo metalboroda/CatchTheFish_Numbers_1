@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.EventBus;
@@ -16,11 +16,14 @@ namespace Assets.__Game.Scripts.Managers
   {
     [Header("Quest Canvas")]
     [SerializeField] private GameObject _questCanvas;
+    [Space]
+    [SerializeField] private Text _questLevelCounterText;
     [SerializeField] private TextMeshProUGUI _questCorrectNumbersTxt;
     [SerializeField] private Button _questPlayButton;
 
     [Header("Game Canvas")]
     [SerializeField] private GameObject _gameCanvas;
+    [Space]
     [SerializeField] private TextMeshProUGUI _gameScoreCounterTxt;
     [SerializeField] private GameObject _gameStarIcon;
     [Space]
@@ -28,21 +31,25 @@ namespace Assets.__Game.Scripts.Managers
     [SerializeField] private GameObject _gameAngryFaceIcon;
     [Space]
     [SerializeField] private Button _gamePauseButton;
-    [Space]
+    [Header("Game Canvas Animation")]
     [SerializeField] private float _gameIconScaleIn = 1.3f;
     [SerializeField] private float _gameIconAnimDuration = 0.15f;
 
     [Header("Win Canvas")]
     [SerializeField] private GameObject _winCanvas;
+    [Space]
     [SerializeField] private Button _winNextLevelBtn;
     [SerializeField] private Button _winRewardButton;
 
     [Header("Lose Canvas")]
     [SerializeField] private GameObject _loseCanvas;
+    [Space]
     [SerializeField] private Button _loseRestartBtn;
 
     [Header("Pause Canvas")]
     [SerializeField] private GameObject _pauseCanvas;
+    [Space]
+    [SerializeField] private Text _pauseLevelCounterText;
     [SerializeField] private TextMeshProUGUI _pauseCorrectNumbersTxt;
     [SerializeField] private Button _pauseContinueBtn;
     [SerializeField] private Button _pauseRestartButton;
@@ -204,6 +211,19 @@ namespace Assets.__Game.Scripts.Managers
       }
     }
 
+    private void DisplayLevelCounter()
+    {
+      if (_gameSettings.OverallLevelIndex == 0)
+        _questLevelCounterText.text = $"НАВЧАЛЬНИЙ РІВЕНЬ";
+      else
+        _questLevelCounterText.text = $"РІВЕНЬ {_gameSettings.OverallLevelIndex}";
+
+      if (_gameSettings.OverallLevelIndex == 0)
+        _pauseLevelCounterText.text = $"НАВЧАЛЬНИЙ РІВЕНЬ";
+      else
+        _pauseLevelCounterText.text = $"РІВЕНЬ {_gameSettings.OverallLevelIndex}";
+    }
+
     private void DisplayCorrectNumbersArray(EventStructs.FishReceivedEvent fishReceivedEvent)
     {
       if (fishReceivedEvent.CorrectNumbers == null) return;
@@ -217,6 +237,8 @@ namespace Assets.__Game.Scripts.Managers
         if (i < fishReceivedEvent.CorrectNumbers.Length - 1)
           arrayString += " ";
       }
+
+      DisplayLevelCounter();
 
       _questCorrectNumbersTxt.text = arrayString;
       _pauseCorrectNumbersTxt.text = arrayString;

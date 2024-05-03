@@ -56,6 +56,13 @@ namespace Assets.__Game.Scripts.EventBus
     }
     #endregion
 
+    #region ScoreManager
+    public struct LevelPointEvent : IEvent
+    {
+      public int LevelPoint;
+    }
+    #endregion
+
     #region UI
 
     public struct UiButtonEvent : IEvent
