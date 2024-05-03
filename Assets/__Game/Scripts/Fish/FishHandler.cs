@@ -14,14 +14,16 @@ namespace Assets.__Game.Scripts.Fish
       private set => _fishNumber = value;
     }
 
-    public void SetFishNumber(int fishNumber)
+    public void SetFishNumber(int fishNumber, bool correct, bool tutorial = false)
     {
       _fishNumber = fishNumber;
 
       EventBus<EventStructs.FishUiEvent>.Raise(new EventStructs.FishUiEvent
       {
         FishId = transform.GetInstanceID(),
-        FishNumber = _fishNumber
+        FishNumber = _fishNumber,
+        Correct = correct,
+        Tutorial = tutorial
       });
     }
 

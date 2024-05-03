@@ -51,7 +51,9 @@ namespace Assets.__Game.Scripts.LevelItems
           FishHandler fishHandler = spawnedFish.GetComponent<FishHandler>();
           FishMovement fishMovement = spawnedFish.GetComponent<FishMovement>();
 
-          fishHandler.SetFishNumber(fishInfo.FishNumber);
+          bool correct = ArrayContains(_correctNumbersContainerSo.CorrectNumbers, fishInfo.FishNumber);
+
+          fishHandler.SetFishNumber(fishInfo.FishNumber, correct, _tutorial);
           fishMovement.SetParameters(randSpeed);
 
           if (ArrayContains(_correctNumbersContainerSo.CorrectNumbers, fishInfo.FishNumber))

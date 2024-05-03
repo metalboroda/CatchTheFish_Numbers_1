@@ -39,6 +39,8 @@ namespace Assets.__Game.Scripts.EventBus
     {
       public int FishId;
       public int FishNumber;
+      public bool Correct;
+      public bool Tutorial;
     }
 
     public struct FishClickEvent : IEvent
