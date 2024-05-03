@@ -16,22 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 1f10b1a55f5f2fe46bded6a4083ca876
-  m_SerializeEntries:
-  - m_GUID: 572ad2e825013234293be35a05b2447d
-    m_Address: Audio/Music/Music_2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 904e810a12a75924595294546d241a20
-    m_Address: Audio/Music/Music_5
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0fb98f566d1b1434bb82a3f3359f7ba5
-    m_Address: Audio/Music/Music_9
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 846d18a594477424bb89afcc09cb8c62, type: 2}
   m_SchemaSet:

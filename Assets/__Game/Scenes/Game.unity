@@ -6114,17 +6114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49094212b7c9f68449be9a541859c875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levels:
-  - LevelName: Level_1
-    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_1.prefab
-  - LevelName: Level_2
-    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_2.prefab
-  - LevelName: Level_3
-    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_3.prefab
-  - LevelName: Level_4
-    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_4.prefab
-  - LevelName: Level_5
-    LevelAddressableKey: Assets/__Game/Resources_moved/Prefabs/Levels/Level_5.prefab
+  _levelPrefabs:
+  - {fileID: 1130790274401838019, guid: 4ba9735d6fa2859478962215d8d1d86e, type: 3}
+  - {fileID: 1130790274401838019, guid: 103284886f2584c44b8717e8e0ca2539, type: 3}
+  - {fileID: 1130790274401838019, guid: c2ac58a91a27d4348948fac2c31c8711, type: 3}
+  - {fileID: 1130790274401838019, guid: c1f340cdc4f866c4eb732989a95b4cad, type: 3}
+  - {fileID: 1130790274401838019, guid: 18e52dc69c5df774bb5af9cb2f7ac97b, type: 3}
 --- !u!1 &1570698455
 GameObject:
   m_ObjectHideFlags: 0

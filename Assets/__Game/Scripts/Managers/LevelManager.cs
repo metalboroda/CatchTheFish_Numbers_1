@@ -1,14 +1,12 @@
 ﻿using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.EventBus;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Assets.__Game.Scripts.Managers
 {
   public class LevelManager : MonoBehaviour
   {
-    [SerializeField] private Level[] _levels;
+    [SerializeField] private GameObject[] _levelPrefabs;
 
     private int _overallLevelIndex = 0;
     private int _currentLevelIndex = 0;
@@ -39,23 +37,18 @@ namespace Assets.__Game.Scripts.Managers
       LoadLevel(_currentLevelIndex);
     }
 
-    public async void LoadLevel(int levelIndex)
+    public void LoadLevel(int levelIndex)
     {
-      if (levelIndex >= _levels.Length)
+      if (levelIndex >= _levelPrefabs.Length)
       {
-        int randomIndex = Random.Range(0, _levels.Length);
+        int randomIndex = Random.Range(0, _levelPrefabs.Length);
 
         levelIndex = randomIndex;
       }
 
-      if (levelIndex < _levels.Length)
+      if (levelIndex < _levelPrefabs.Length)
       {
-        Level level = _levels[levelIndex];
-        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(level.LevelAddressableKey);
-
-        await handle.Task;
-
-        _currentLevelPrefab = handle.Result;
+        _currentLevelPrefab = _levelPrefabs[levelIndex];
 
         Instantiate(_currentLevelPrefab);
       }
@@ -70,8 +63,8 @@ namespace Assets.__Game.Scripts.Managers
       _currentLevelIndex++;
       _gameSettings.LevelIndex = _currentLevelIndex;
 
-      if (_currentLevelIndex > _levels.Length)
-        _currentLevelIndex = Random.Range(0, _levels.Length);
+      if (_currentLevelIndex >= _levelPrefabs.Length)
+        _currentLevelIndex = Random.Range(0, _levelPrefabs.Length);
 
       SettingsManager.SaveSettings(_gameSettings);
     }

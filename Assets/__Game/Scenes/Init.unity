@@ -1643,12 +1643,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _musicMixer: {fileID: 24100000, guid: e5f93ecdc894adc4c91b802da2f07a4b, type: 2}
   _soundtrackClips:
-  - ClipName: Music_2
-    ClipAddressableKey: Audio/Music/Music_2
-  - ClipName: Music_5
-    ClipAddressableKey: Audio/Music/Music_5
-  - ClipName: Music_9
-    ClipAddressableKey: Audio/Music/Music_9
+  - {fileID: 8300000, guid: 572ad2e825013234293be35a05b2447d, type: 3}
+  - {fileID: 8300000, guid: 904e810a12a75924595294546d241a20, type: 3}
+  - {fileID: 8300000, guid: 0fb98f566d1b1434bb82a3f3359f7ba5, type: 3}
 --- !u!82 &2104235718
 AudioSource:
   m_ObjectHideFlags: 0

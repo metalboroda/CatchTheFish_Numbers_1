@@ -1,9 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Audio;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Assets.__Game.Scripts.Audio
 {
@@ -13,9 +11,8 @@ namespace Assets.__Game.Scripts.Audio
     public static Soundtrack Instance { get; private set; }
 
     [SerializeField] private AudioMixer _musicMixer;
-
     [Space]
-    [SerializeField] private AddressableAudioClip[] _soundtrackClips;
+    [SerializeField] private AudioClip[] _soundtrackClips;
 
     private List<int> _previousTracks = new List<int>();
     private bool _isPaused = false;
@@ -46,29 +43,20 @@ namespace Assets.__Game.Scripts.Audio
         if (!_isPaused)
         {
           int randomIndex = GetRandomTrackIndex();
-          var loadOperation = Addressables.LoadAssetAsync<AudioClip>(_soundtrackClips[randomIndex].ClipAddressableKey);
+          AudioClip clip = _soundtrackClips[randomIndex];
 
-          yield return loadOperation;
+          _audioSource.clip = clip;
+          _audioSource.Play();
 
-          if (loadOperation.Status == AsyncOperationStatus.Succeeded)
+          while (_audioSource.isPlaying)
           {
-            _audioSource.clip = loadOperation.Result;
-            _audioSource.Play();
-
-            while (_audioSource.isPlaying)
-            {
-              yield return null;
-            }
-
-            _previousTracks.Add(randomIndex);
-
-            if (_previousTracks.Count > 2)
-              _previousTracks.RemoveAt(0);
+            yield return null;
           }
-          else
-          {
-            Debug.LogError("Failed to load audio clip: " + _soundtrackClips[randomIndex].ClipAddressableKey);
-          }
+
+          _previousTracks.Add(randomIndex);
+
+          if (_previousTracks.Count > 2)
+            _previousTracks.RemoveAt(0);
         }
         else
         {

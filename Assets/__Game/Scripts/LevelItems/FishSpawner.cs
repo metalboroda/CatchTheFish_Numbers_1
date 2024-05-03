@@ -1,10 +1,10 @@
-﻿using Assets.__Game.Scripts.EventBus;
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Fish;
 using Assets.__Game.Scripts.Tools;
-using System.Collections.Generic;
 using Assets.__Game.Scripts.SOs;
-using UnityEngine;
-using System.Collections;
 
 namespace Assets.__Game.Scripts.LevelItems
 {
@@ -19,8 +19,8 @@ namespace Assets.__Game.Scripts.LevelItems
     [Space]
     [SerializeField] private FishSpawnInfo[] _fishToSpawn;
 
-    private List<FishHandler> _correctNumbersFishHandlers = new();
-    private List<FishHandler> _incorrectNumbersFishHandlers = new();
+    private List<FishHandler> _correctNumbersFishHandlers = new List<FishHandler>();
+    private List<FishHandler> _incorrectNumbersFishHandlers = new List<FishHandler>();
 
     private RandomPointInCamera _randomPointInCamera;
 
@@ -46,7 +46,8 @@ namespace Assets.__Game.Scripts.LevelItems
           Vector3 spawnPosition = new Vector3(point.x, point.y, 0);
           Quaternion randomRotation = Quaternion.Euler(0f, Random.Range(0, 2) == 0 ? 90f : -90f, 0f);
 
-          GameObject spawnedFish = Instantiate(fishInfo.FishContainerSo.GetRandomFish(), spawnPosition, randomRotation);
+          GameObject fishPrefab = fishInfo.FishContainerSo.GetRandomFish();
+          GameObject spawnedFish = Instantiate(fishPrefab, spawnPosition, randomRotation);
           FishHandler fishHandler = spawnedFish.GetComponent<FishHandler>();
           FishMovement fishMovement = spawnedFish.GetComponent<FishMovement>();
 
