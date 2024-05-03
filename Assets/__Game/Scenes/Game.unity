@@ -3660,7 +3660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &755231749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6453,6 +6453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelPrefabs:
+  - {fileID: 1130790274401838019, guid: 0dd4ded407db5744989bb21f1f1c6287, type: 3}
   - {fileID: 1130790274401838019, guid: 4ba9735d6fa2859478962215d8d1d86e, type: 3}
   - {fileID: 1130790274401838019, guid: 103284886f2584c44b8717e8e0ca2539, type: 3}
   - {fileID: 1130790274401838019, guid: c2ac58a91a27d4348948fac2c31c8711, type: 3}
