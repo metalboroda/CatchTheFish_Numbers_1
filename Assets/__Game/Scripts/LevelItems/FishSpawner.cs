@@ -12,10 +12,10 @@ namespace Assets.__Game.Scripts.LevelItems
   {
     [SerializeField] private float _minFishMovementSpeed;
     [SerializeField] private float _maxFishMovementSpeed;
-
+    [Space]
+    [SerializeField] private bool _tutorial;
     [Space]
     [SerializeField] private CorrectNumbersContainerSo _correctNumbersContainerSo;
-
     [Space]
     [SerializeField] private FishSpawnInfo[] _fishToSpawn;
 

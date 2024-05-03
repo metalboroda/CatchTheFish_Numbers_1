@@ -41,7 +41,7 @@ namespace Assets.__Game.Scripts.Managers
     {
       if (levelIndex >= _levelPrefabs.Length)
       {
-        int randomIndex = Random.Range(0, _levelPrefabs.Length);
+        int randomIndex = Random.Range(1, _levelPrefabs.Length);
 
         levelIndex = randomIndex;
       }
