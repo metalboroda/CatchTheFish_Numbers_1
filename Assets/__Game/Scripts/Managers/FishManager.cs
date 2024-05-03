@@ -10,7 +10,7 @@ namespace Assets.__Game.Scripts.Managers
 {
   public class FishManager : MonoBehaviour
   {
-    [SerializeField] private CorrectNumbersContainerSo _correctNumbersContainerSo;
+    [SerializeField] private CorrectValuesContainerSo _correctNumbersContainerSo;
 
     private List<FishHandler> _correctNumberFish = new();
     private List<FishHandler> _incorrectNumberFish = new();
@@ -41,7 +41,7 @@ namespace Assets.__Game.Scripts.Managers
     {
       EventBus<EventStructs.FishReceivedEvent>.Raise(new EventStructs.FishReceivedEvent
       {
-        CorrectNumbers = _correctNumbersContainerSo.CorrectNumbers
+        CorrectValues = _correctNumbersContainerSo.CorrectValues
       });
     }
 
@@ -53,7 +53,7 @@ namespace Assets.__Game.Scripts.Managers
 
     private void ReceiveFish(EventStructs.FishClickEvent fishClickEvent)
     {
-      foreach (var number in _correctNumbersContainerSo.CorrectNumbers)
+      foreach (var number in _correctNumbersContainerSo.CorrectValues)
       {
         if (_correctNumberFish.Contains(fishClickEvent.FishHandler))
         {

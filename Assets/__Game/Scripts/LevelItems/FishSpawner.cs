@@ -15,7 +15,7 @@ namespace Assets.__Game.Scripts.LevelItems
     [Space]
     [SerializeField] private bool _tutorial;
     [Space]
-    [SerializeField] private CorrectNumbersContainerSo _correctNumbersContainerSo;
+    [SerializeField] private CorrectValuesContainerSo _correctNumbersContainerSo;
     [Space]
     [SerializeField] private FishSpawnInfo[] _fishToSpawn;
 
@@ -51,12 +51,12 @@ namespace Assets.__Game.Scripts.LevelItems
           FishHandler fishHandler = spawnedFish.GetComponent<FishHandler>();
           FishMovement fishMovement = spawnedFish.GetComponent<FishMovement>();
 
-          bool correct = ArrayContains(_correctNumbersContainerSo.CorrectNumbers, fishInfo.FishNumber);
+          bool correct = ArrayContains(_correctNumbersContainerSo.CorrectValues, fishInfo.FishValue);
 
-          fishHandler.SetFishNumber(fishInfo.FishNumber, correct, _tutorial);
+          fishHandler.SetFishNumber(fishInfo.FishValue, correct, _tutorial);
           fishMovement.SetParameters(randSpeed);
 
-          if (ArrayContains(_correctNumbersContainerSo.CorrectNumbers, fishInfo.FishNumber))
+          if (ArrayContains(_correctNumbersContainerSo.CorrectValues, fishInfo.FishValue))
             _correctNumbersFishHandlers.Add(fishHandler);
           else
             _incorrectNumbersFishHandlers.Add(fishHandler);
@@ -74,11 +74,11 @@ namespace Assets.__Game.Scripts.LevelItems
       });
     }
 
-    private bool ArrayContains(int[] array, int number)
+    private bool ArrayContains(string[] array, string value)
     {
-      foreach (int num in array)
+      foreach (string num in array)
       {
-        if (num == number) return true;
+        if (num == value) return true;
       }
 
       return false;

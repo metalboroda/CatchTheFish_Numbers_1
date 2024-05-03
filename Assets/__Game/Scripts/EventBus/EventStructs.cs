@@ -28,7 +28,7 @@ namespace Assets.__Game.Scripts.EventBus
     public struct FishReceivedEvent : IEvent
     {
       public bool CorrectFish;
-      public int[] CorrectNumbers;
+      public string[] CorrectValues;
       public int CorrectFishIncrement;
       public int IncorrectFishIncrement;
     }
@@ -38,14 +38,14 @@ namespace Assets.__Game.Scripts.EventBus
     public struct FishUiEvent : IEvent
     {
       public int FishId;
-      public int FishNumber;
+      public string FishValue;
       public bool Correct;
       public bool Tutorial;
     }
 
     public struct FishClickEvent : IEvent
     {
-      public int FishNumber;
+      public string FishValue;
       public FishHandler FishHandler;
     }
 

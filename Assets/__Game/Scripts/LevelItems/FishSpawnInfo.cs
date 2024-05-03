@@ -9,7 +9,7 @@ namespace Assets.__Game.Scripts.LevelItems
     public FishContainerSo FishContainerSo;
 
     [Space]
-    public int FishNumber;
+    public string FishValue;
     public int Amount;
   }
 }

@@ -6,22 +6,22 @@ namespace Assets.__Game.Scripts.Fish
 {
   public class FishHandler : MonoBehaviour, IPointerClickHandler
   {
-    private int _fishNumber;
+    private string _fishValue;
 
-    public int FishNumber
+    public string FishValue
     {
-      get => _fishNumber;
-      private set => _fishNumber = value;
+      get => _fishValue;
+      private set => _fishValue = value;
     }
 
-    public void SetFishNumber(int fishNumber, bool correct, bool tutorial = false)
+    public void SetFishNumber(string fishValue, bool correct, bool tutorial = false)
     {
-      _fishNumber = fishNumber;
+      _fishValue = fishValue;
 
       EventBus<EventStructs.FishUiEvent>.Raise(new EventStructs.FishUiEvent
       {
         FishId = transform.GetInstanceID(),
-        FishNumber = _fishNumber,
+        FishValue = _fishValue,
         Correct = correct,
         Tutorial = tutorial
       });
@@ -32,7 +32,7 @@ namespace Assets.__Game.Scripts.Fish
       EventBus<EventStructs.FishClickEvent>.Raise(new EventStructs.FishClickEvent
       {
         FishHandler = this,
-        FishNumber = _fishNumber
+        FishValue = _fishValue
       });
     }
 

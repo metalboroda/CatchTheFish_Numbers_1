@@ -226,15 +226,15 @@ namespace Assets.__Game.Scripts.Managers
 
     private void DisplayCorrectNumbersArray(EventStructs.FishReceivedEvent fishReceivedEvent)
     {
-      if (fishReceivedEvent.CorrectNumbers == null) return;
+      if (fishReceivedEvent.CorrectValues == null) return;
 
       string arrayString = "";
 
-      for (int i = 0; i < fishReceivedEvent.CorrectNumbers.Length; i++)
+      for (int i = 0; i < fishReceivedEvent.CorrectValues.Length; i++)
       {
-        arrayString += fishReceivedEvent.CorrectNumbers[i].ToString();
+        arrayString += fishReceivedEvent.CorrectValues[i].ToString();
 
-        if (i < fishReceivedEvent.CorrectNumbers.Length - 1)
+        if (i < fishReceivedEvent.CorrectValues.Length - 1)
           arrayString += " ";
       }
 

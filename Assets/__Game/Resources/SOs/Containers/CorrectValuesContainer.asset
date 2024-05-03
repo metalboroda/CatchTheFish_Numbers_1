@@ -10,6 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c899d8a6363e5fb4687180bcc2fb33df, type: 3}
-  m_Name: CorrectNumbersContainer
+  m_Name: CorrectValuesContainer
   m_EditorClassIdentifier: 
-  _correctNumbers: 0100000002000000
+  _correctValues:
+  - 1
+  - 2

@@ -33,7 +33,7 @@ namespace Assets.__Game.Scripts.Fish
 
       foreach (var text in _numberTexts)
       {
-        text.SetText(fishUiEvent.FishNumber.ToString());
+        text.SetText(fishUiEvent.FishValue.ToString());
       }
     }
 
