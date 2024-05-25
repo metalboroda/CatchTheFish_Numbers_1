@@ -160,6 +160,15 @@ namespace Assets.__Game.Scripts.Managers
       });
 
       // Lose
+      _loseNextLevelBtn.onClick.AddListener(() =>
+      {
+        EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
+        {
+          UiEnums = UiEnums.WinNextLevelButton
+        });
+
+        _gameBootstrapper.RestartLevel();
+      });
       _loseRestartBtn.onClick.AddListener(() =>
       {
         EventBus<EventStructs.UiButtonEvent>.Raise(new EventStructs.UiButtonEvent
@@ -292,6 +301,9 @@ namespace Assets.__Game.Scripts.Managers
         case GameLoseState:
           _globalCanvas.SetActive(true);
           SwitchCanvas(_loseCanvas);
+
+          if (_lastLevel == true)
+            _winNextLevelBtn.gameObject.SetActive(false);
           break;
         case GamePauseState:
           _globalCanvas.SetActive(true);
