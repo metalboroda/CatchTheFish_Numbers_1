@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.Fish;
 using Assets.__Game.Scripts.StateMachine;
+using System.Collections.Generic;
 
 namespace Assets.__Game.Scripts.EventBus
 {
@@ -12,6 +12,17 @@ namespace Assets.__Game.Scripts.EventBus
     {
       public State State;
     }
+    #endregion
+
+    #region LevelManager
+    public struct LastLevelEvent : IEvent
+    {
+      public bool LastLevel;
+    }
+    #endregion
+
+    #region Game
+    public struct StuporEvent : IEvent { }
     #endregion
 
     #region Fish Spawner
@@ -79,6 +90,13 @@ namespace Assets.__Game.Scripts.EventBus
     public struct SendComponentEvent<T> : IEvent
     {
       public T Data { get; set; }
+    }
+    #endregion
+
+    #region Timer
+    public struct TimerEvent : IEvent
+    {
+      public int Time;
     }
     #endregion
   }
