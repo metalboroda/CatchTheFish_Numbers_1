@@ -11,5 +11,7 @@ namespace Assets.__Game.Scripts.LevelItems
     [Space]
     public string FishValue;
     public int Amount;
+    [Space]
+    public AudioClip FishAudioClip;
   }
 }

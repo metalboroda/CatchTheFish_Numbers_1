@@ -7,11 +7,18 @@ namespace Assets.__Game.Scripts.Fish
   public class FishHandler : MonoBehaviour, IPointerClickHandler
   {
     private string _fishValue;
+    private AudioClip _audioClip;
+
 
     public string FishValue
     {
       get => _fishValue;
       private set => _fishValue = value;
+    }
+
+    public void SetAudioCLip(AudioClip clip)
+    {
+      _audioClip = clip;
     }
 
     public void SetFishNumber(string fishValue, bool correct, bool tutorial = false)
@@ -32,7 +39,8 @@ namespace Assets.__Game.Scripts.Fish
       EventBus<EventStructs.FishClickEvent>.Raise(new EventStructs.FishClickEvent
       {
         FishHandler = this,
-        FishValue = _fishValue
+        FishValue = _fishValue,
+        FishAudioCLip = _audioClip
       });
     }
 

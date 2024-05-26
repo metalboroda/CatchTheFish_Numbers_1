@@ -188,18 +188,23 @@ MonoBehaviour:
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishValue: 
     Amount: 1
+    FishAudioClip: {fileID: 8300000, guid: eb0931f0a18609a43a724550466c4829, type: 3}
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishValue: 
     Amount: 1
+    FishAudioClip: {fileID: 8300000, guid: 5697a57a46c6bdb43b577fae663c7310, type: 3}
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishValue: 
     Amount: 1
+    FishAudioClip: {fileID: 8300000, guid: 8a4face7349cc0b4299290cde6fa8b6b, type: 3}
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishValue: 
     Amount: 1
+    FishAudioClip: {fileID: 8300000, guid: f33d0a6cc5570264095892d8029efca4, type: 3}
   - FishContainerSo: {fileID: 11400000, guid: 60abe902b5aefe546b7b6ce4fe502c33, type: 2}
     FishValue: 
     Amount: 1
+    FishAudioClip: {fileID: 8300000, guid: a8eb80f5936092046bc023e8c882a9ec, type: 3}
 --- !u!1 &2421522915238838626
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,6 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6809574097166187736}
+  - component: {fileID: 1376476842133807061}
   - component: {fileID: 8895770184019529028}
   m_Layer: 0
   m_Name: FishManager
@@ -232,6 +238,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3761079843993113025}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1376476842133807061
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2421522915238838626}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 6480035649268931048, guid: e5f93ecdc894adc4c91b802da2f07a4b, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &8895770184019529028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _correctNumbersContainerSo: {fileID: 11400000, guid: ac2ac9823212fa8488a12aae31a0df98, type: 2}
+  _stuporTimeoutSeconds: 10
 --- !u!1 &3525761707975246884
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c80bdc985c144894ba0b61e0f1225e77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _questAudio: {fileID: 0}
+  _questAudio: {fileID: 8300000, guid: 2da7e86595f5d24448b4d001f72a8bf0, type: 3}
   _winAnnouncerClips:
   - {fileID: 8300000, guid: 1883ce22c16b44045a6f8ea8e9b4161e, type: 3}
   - {fileID: 8300000, guid: a6f2d86124545214fb9fa5e700e15e66, type: 3}

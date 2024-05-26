@@ -2,6 +2,7 @@ using Assets.__Game.Scripts.Enums;
 using Assets.__Game.Scripts.Fish;
 using Assets.__Game.Scripts.StateMachine;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.__Game.Scripts.EventBus
 {
@@ -58,6 +59,7 @@ namespace Assets.__Game.Scripts.EventBus
     {
       public string FishValue;
       public FishHandler FishHandler;
+      public AudioClip FishAudioCLip;
     }
 
     public struct FishDestroyEvent : IEvent

@@ -1,6 +1,7 @@
 using Assets.__Game.Scripts.EventBus;
 using Assets.__Game.Scripts.Game.States;
 using Assets.__Game.Scripts.Tools;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.__Game.Resources.Scripts.LevelItem
@@ -20,6 +21,7 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
 
     private EventBinding<EventStructs.StateChanged> _stateEvent;
     private EventBinding<EventStructs.StuporEvent> _stuporEvent;
+    private EventBinding<EventStructs.FishClickEvent> _fishClickEvent;
 
     private void Awake()
     {
@@ -32,12 +34,14 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
     {
       _stateEvent = new EventBinding<EventStructs.StateChanged>(PlayScreenSound);
       _stuporEvent = new EventBinding<EventStructs.StuporEvent>(PlayStuporSound);
+      _fishClickEvent = new EventBinding<EventStructs.FishClickEvent>(PlayFishAudioCLip);
     }
 
     private void OnDisable()
     {
       _stateEvent.Remove(PlayScreenSound);
       _stuporEvent.Remove(PlayStuporSound);
+      _fishClickEvent.Remove(PlayFishAudioCLip);
     }
 
     private void Start()
@@ -50,20 +54,32 @@ namespace Assets.__Game.Resources.Scripts.LevelItem
       switch (state.State)
       {
         case GameWinState:
-          _audioSource.Stop();
-          _audioSource.PlayOneShot(_audioTool.GetRandomCLip(_winAnnouncerClips));
+          StartCoroutine(DoPlayOneShotWithDelay(_audioTool.GetRandomCLip(_winAnnouncerClips), 2f));
           break;
         case GameLoseState:
-          _audioSource.Stop();
-          _audioSource.PlayOneShot(_audioTool.GetRandomCLip(_loseAnnouncerClips));
+          StartCoroutine(DoPlayOneShotWithDelay(_audioTool.GetRandomCLip(_loseAnnouncerClips), 2f));
           break;
       }
+    }
+
+    private IEnumerator DoPlayOneShotWithDelay(AudioClip audioClip, float delay = 0)
+    {
+      yield return new WaitForSeconds(delay);
+
+      _audioSource.Stop();
+      _audioSource.PlayOneShot(audioClip);
     }
 
     private void PlayStuporSound(EventStructs.StuporEvent stuporEvent)
     {
       _audioSource.Stop();
       _audioSource.PlayOneShot(_audioTool.GetRandomCLip(_stuporAnnouncerClips));
+    }
+
+    private void PlayFishAudioCLip(EventStructs.FishClickEvent fishClickEvent)
+    {
+      _audioSource.Stop();
+      _audioSource.PlayOneShot(fishClickEvent.FishAudioCLip);
     }
   }
 }

@@ -280,16 +280,16 @@ namespace Assets.__Game.Scripts.Managers
       switch (state.State)
       {
         case GameQuestState:
-          _globalCanvas.SetActive(true);
+          StartCoroutine(DoSwitchGlobalCanvas(true));
           SwitchCanvas(_questCanvas);
           break;
         case GameplayState:
-          _globalCanvas.SetActive(false);
+          StartCoroutine(DoSwitchGlobalCanvas(false));
           SwitchCanvas(_gameCanvas);
           break;
         case GameWinState:
-          _globalCanvas.SetActive(true);
-          SwitchCanvas(_winCanvas);
+          StartCoroutine(DoSwitchGlobalCanvas(false, 2f));
+          SwitchCanvas(_winCanvas, 2f);
           TryToEnableReward();
 
           if (_lastLevel == true)
@@ -299,14 +299,14 @@ namespace Assets.__Game.Scripts.Managers
           }
           break;
         case GameLoseState:
-          _globalCanvas.SetActive(true);
-          SwitchCanvas(_loseCanvas);
+          StartCoroutine(DoSwitchGlobalCanvas(false, 2f));
+          SwitchCanvas(_loseCanvas, 2f);
 
           if (_lastLevel == true)
             _loseNextLevelBtn.gameObject.SetActive(false);
           break;
         case GamePauseState:
-          _globalCanvas.SetActive(true);
+          StartCoroutine(DoSwitchGlobalCanvas(false));
           SwitchCanvas(_pauseCanvas);
           break;
       }
@@ -317,7 +317,7 @@ namespace Assets.__Game.Scripts.Managers
       StartCoroutine(DoSwitchCanvas(canvas, delay));
     }
 
-    private IEnumerator DoSwitchCanvas(GameObject canvas, float delay)
+    private IEnumerator DoSwitchCanvas(GameObject canvas, float delay = 0)
     {
       yield return new WaitForSeconds(delay);
 
@@ -328,6 +328,13 @@ namespace Assets.__Game.Scripts.Managers
         else
           canvasItem.SetActive(false);
       }
+    }
+
+    private IEnumerator DoSwitchGlobalCanvas(bool enbale, float delay = 0)
+    {
+      yield return new WaitForSeconds(delay);
+
+      _globalCanvas.SetActive(enbale);
     }
 
     private void TryToEnableReward()
